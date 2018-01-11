@@ -216,7 +216,7 @@ ___For all applications___
    - Greenfield innovation
 
 ---
-### Docker Datacenter
+## Docker Datacenter
 _Containers in production_
 
 ![image](pptimages/ucp.png)
@@ -225,3 +225,9 @@ Note:
 - Enterprise container orchestration, management and security for dev and ops
 - Available today for Linux environments
 - Q4 2016 beta for Windows environments 
+
+
+---
+## Hands On
+
+#### Exercises [here](https://github.com/mogensen/docker-handson-training/tree/master/1-Intro-to-docker/Exercises.md)
