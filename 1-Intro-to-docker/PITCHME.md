@@ -33,19 +33,24 @@ Focus on Docker, orchestration and ci/cd
 - Fundamentally different architectures
 - Fundamentally different benefits
 
----?image=pptimages/image12.png&size=auto
+---
 ## VMs
 
----?image=pptimages/image13.png&size=auto
+![image](pptimages/image12.png)
+
+---
 ## Containers
+
+![image](pptimages/image13.png)
 
 ---
 ## They’re different, not mutually exclusive
 
 ![image](pptimages/image14.png)
 
+
 ---
-## Build, Ship, and Run
+# Build, Ship, and Run
 
 ---
 ## Docker vocabulary
@@ -129,11 +134,11 @@ docker build –t mikegcoleman/catweb:2.0 .
 docker push mikegcoleman/catweb:2.0
 ```
 
-
 ---
 ## Put it all together
 
-Build, Ship, Run Workflow
+_Build, Ship, Run Workflow_
+
 ![image](pptimages/diagram.png)
 
 ---
@@ -162,7 +167,7 @@ Browse to port 5000 on your machine: http://localhost:5000
 ---
 ## Image Layers
 
-![image](pptimages/catweb-layers.PNG)
+![image](pptimages/catweb-layers.png)
 
 ---
 ## Docker File System
@@ -199,65 +204,24 @@ docker file system structure
 
 - Can be created in a Dockerfile or via CLI
 
-<!--
 ---
-# But, Why?
+## One platform - one journey
+___For all applications___
 
----
-## Enterprises are looking to Docker for critical transformations
-
-80%
-Docker is central to cloud strategy
-Docker Survey: State of App development :  Q1 - 2016
-3 out 4
-Top initiatives revolve around applications
-44%
-Looking to adopt DevOps
-
-
-App Modernization
-DevOps
-Cloud
-State of App development Survey:  Q1 2016
+1. Containerize Legacy Applications
+   - Lift and shift for portability and efficiency
+1. Transform Legacy to Microservices
+   - Look for shared services to transform
+1. Accelerate New Applications
+   - Greenfield innovation
 
 ---
-## Docker delivers speed, flexibility and savings
+### Docker Datacenter
+_Containers in production_
 
-- Agility
-Portability
-Control
-State of App development Survey:  Q1 2016, Cornell University case study
-13X
-More software releases
-62%
-Report reduction in MTTR
-10X
-Cost reduction in maintaining existing applications
-Eliminate
-“works on my machine” issues
-41%
-Move workloads across private/public clouds
-65%
-Reduction in developer onboarding time
--->
+![image](pptimages/ucp.png)
 
----
-## One platform delivers one journey for all applications
-1 Containerize Legacy Applications
-  - Lift and shift for portability and efficiency
-
-2 Transform Legacy to Microservices
-  - Look for shared services to transform
-
-3 Accelerate New Applications
-  - Greenfield innovation
-
----
-## Containers in production with Docker Datacenter
-
-![image](pptimages/ucp.PNG)
-
+Note:
 - Enterprise container orchestration, management and security for dev and ops
 - Available today for Linux environments
 - Q4 2016 beta for Windows environments 
-
