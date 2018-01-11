@@ -80,66 +80,53 @@ docker rmi mikegcoleman/catweb:latest // or <image id>
 ---
 ## Dockerfile – Linux Example
 
+- Instructions on how to build a Docker image
+- Looks very similar to "native" commands
+
 ```dockerfile
-# our base image
 FROM alpine:latest
 
-# Install python and pip
 RUN apk add --update py-pip
 
-# upgrade pip
 RUN pip install --upgrade pip
 
-# install Python modules needed by the Python app
 COPY requirements.txt /usr/src/app/
 RUN pip install --no-cache-dir -r /usr/src/app/requirements.txt
 
-# copy files required for the app to run
 COPY app.py /usr/src/app/
 COPY templates/index.html /usr/src/app/templates/
 
-# tell the port number the container should expose
 EXPOSE 5000
 
-# run the application
 CMD ["python", "/usr/src/app/app.py"]
 ```
 
-- Instructions on how to build a Docker image
-- Looks very similar to "native" commands
-- Important to optimize your Dockerfile
+@[1](Our base image)
+@[3](Install python and pip)
+@[5](Upgrade pip)
+@[7-8](Install Python modules needed by the Python app)
+@[10-11](Copy files required for the app to run)
+@[13](Tell the port number the container should expose)
+@[15](How should docker start the application)
 
 ---
 ## Basic Docker Commands
 
 ```dockerfile
-# our base image
 FROM alpine:latest
-
-# Install python and pip
 RUN apk add --update py-pip
-
-# upgrade pip
 RUN pip install --upgrade pip
-
-# install Python modules needed by the Python app
 COPY requirements.txt /usr/src/app/
 RUN pip install --no-cache-dir -r /usr/src/app/requirements.txt
-
-# copy files required for the app to run
 COPY app.py /usr/src/app/
 COPY templates/index.html /usr/src/app/templates/
-
-# tell the port number the container should expose
 EXPOSE 5000
-
-# run the application
 CMD ["python", "/usr/src/app/app.py"]
 ```
 
 ```shell
-$docker build –t mikegcoleman/catweb:2.0 .
-$docker push mikegcoleman/catweb:2.0
+docker build –t mikegcoleman/catweb:2.0 .
+docker push mikegcoleman/catweb:2.0
 ```
 
 
