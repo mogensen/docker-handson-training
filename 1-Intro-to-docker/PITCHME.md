@@ -53,18 +53,18 @@ Fundamentally different benefits
 
 ---
 ## Some Docker vocabulary
-![image](pptimages/image17.png)
+
+|  |  |
+| - | - |
+| Docker Image | The basis of a Docker container. Represents a full application. |
+| Docker Container | The standard executing unit |
+| Docker Engine | Creates, ships and runs Docker containers |
+| Registry Service  | Cloud or server based storage and distribution of images |
+
 ![image](pptimages/image18.png)
+![image](pptimages/image17.png)
 ![image](pptimages/image19.png)
 ![image](pptimages/image20.png)
-
-| | |
-| --- | --- |
-| ![image](pptimages/image17.png) | <b> Docker Image </b>   The basis of a Docker container. Represents a full application |
-| ![image](pptimages/image18.png) | <b> Docker Container </b>  The standard unit in which the application service resides and executes |
-| ![image](pptimages/image19.png) | <b> Docker Engine </b>      Creates, ships and runs Docker containers deployable on a physical or virtual, host locally, in a datacenter or cloud service provider |
-| ![image](pptimages/image20.png) | <b> Registry Service (Docker Hub or Docker Trusted Registry) </b> Cloud or server based storage and distribution service for your images |
-
 
 ---
 ## Basic Docker Commands
