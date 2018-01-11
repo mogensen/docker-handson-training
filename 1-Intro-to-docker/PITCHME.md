@@ -54,43 +54,10 @@ Fundamentally different benefits
 ---
 ## Some Docker vocabulary
 
-<div class="left">
-    ![image](pptimages/image17.png)
-</div>
-<div class="right">
-    <ul>
-      <li>Docker Image
-      <li>The basis of a Docker container. Represents a full application
-    </ul>
-</div>
-<br>
-<div class="left">
-    <img srg="pptimages/image18.png"/>
-</div>
-<div class="right">
-    <ul>
-      <li>Docker Container
-      <li>The standard unit in which the application service resides and executes
-    </ul>
-</div>
-<div class="left">
-    <img srg="pptimages/image19.png"/>
-</div>
-<div class="right">
-    <ul>
-      <li>Docker Engine
-      <li>Creates, ships and runs Docker containers deployable on a physical or virtual, host locally, in a datacenter or cloud service provider
-    </ul>
-</div>
-<div class="left">
-    <img srg="pptimages/image20.png"/>
-</div>
-<div class="right">
-    <ul>
-      <li>Registry Service (Docker Hub or Docker Trusted Registry)
-      <li>Cloud or server based storage and distribution service for your images
-    </ul>
-</div>
+| ![image](pptimages/image17.png) | Docker Image       <br> The basis of a Docker container. Represents a full application |
+| ![image](pptimages/image18.png) | Docker Container   <br> The standard unit in which the application service resides and executes |
+| ![image](pptimages/image19.png) | Docker Engine      <br>Creates, ships and runs Docker containers deployable on a physical or virtual, host locally, in a datacenter or cloud service provider |
+| ![image](pptimages/image20.png) | Registry Service (Docker Hub or Docker Trusted Registry) <br>Cloud or server based storage and distribution service for your images |
 
 ---
 ## Basic Docker Commands
