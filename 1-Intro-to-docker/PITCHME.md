@@ -1,7 +1,5 @@
 # Introduction to Docker
 
-![image](pptimages/image3.png)
-
 ---
 ## About me
 ### Frederik Mogensen
@@ -10,7 +8,6 @@ Software Pilot at Trifork
 Focus on Docker, orchestration and ci/cd
 
 ![image](pptimages/image10.jpeg)
-![image](pptimages/image11.png)
 
 ---
 ## Agenda
@@ -21,27 +18,26 @@ Focus on Docker, orchestration and ci/cd
 - But Why?
 - Multi-container applications
 
-Docker Compose
-Docker Swarm
-Getting started
-Q & A
+- Docker Compose
+- Docker Swarm
+- Getting started
+- Q & A
 
 ---
 # Containers are not VMs
 
 ---
 ## Containers are NOT VMs
-Easy connection to make
-Fundamentally different architectures
-Fundamentally different benefits
 
----
+- Easy connection to make
+- Fundamentally different architectures
+- Fundamentally different benefits
+
+---?image=pptimages/image12.png&size=auto
 ## VMs
-![image](pptimages/image12.png)
----
-## Containers
 
-![image](pptimages/image13.png)
+---?image=pptimages/image13.png&size=auto
+## Containers
 
 ---
 ## They’re different, not mutually exclusive
@@ -52,14 +48,16 @@ Fundamentally different benefits
 ## Build, Ship, and Run
 
 ---
-## Some Docker vocabulary
+## Docker vocabulary
 
-|  |  |
-| - | - |
-| Docker Image | The basis of a Docker container. Represents a full application. |
-| Docker Container | The standard executing unit |
-| Docker Engine | Creates, ships and runs Docker containers |
-| Registry Service  | Cloud or server based storage and distribution of images |
+- Docker Image
+  - The basis of a Docker container. Represents a full application.
+- Docker Container 
+  - The standard executing unit
+- Docker Engine 
+  - Creates, ships and runs Docker containers
+- Registry Service
+  - Cloud or server based storage and distribution of images
 
 ![image](pptimages/image18.png)
 ![image](pptimages/image17.png)
@@ -69,20 +67,43 @@ Fundamentally different benefits
 ---
 ## Basic Docker Commands
 
-```shell
-$ docker pull mikegcoleman/catweb:latest
-$ docker images
-$ docker run -d -p 5000:5000 --name catweb mikegcoleman/catweb:latest
-$ docker ps
-$ docker stop catweb // or <container id>
-$ docker rm catweb // or <container id>
-$ docker rmi mikegcoleman/catweb:latest // or <image id>
+```bash
+docker pull mikegcoleman/catweb:latest
+docker images
+docker run -d -p 5000:5000 --name catweb mikegcoleman/catweb:latest
+docker ps
+docker stop catweb // or <container id>
+docker rm catweb // or <container id>
+docker rmi mikegcoleman/catweb:latest // or <image id>
 ```
 
 ---
 ## Dockerfile – Linux Example
 
-![image](pptimages/image21.png)
+```dockerfile
+# our base image
+FROM alpine:latest
+
+# Install python and pip
+RUN apk add --update py-pip
+
+# upgrade pip
+RUN pip install --upgrade pip
+
+# install Python modules needed by the Python app
+COPY requirements.txt /usr/src/app/
+RUN pip install --no-cache-dir -r /usr/src/app/requirements.txt
+
+# copy files required for the app to run
+COPY app.py /usr/src/app/
+COPY templates/index.html /usr/src/app/templates/
+
+# tell the port number the container should expose
+EXPOSE 5000
+
+# run the application
+CMD ["python", "/usr/src/app/app.py"]
+```
 
 - Instructions on how to build a Docker image
 - Looks very similar to "native" commands
@@ -91,16 +112,41 @@ $ docker rmi mikegcoleman/catweb:latest // or <image id>
 ---
 ## Basic Docker Commands
 
+```dockerfile
+# our base image
+FROM alpine:latest
+
+# Install python and pip
+RUN apk add --update py-pip
+
+# upgrade pip
+RUN pip install --upgrade pip
+
+# install Python modules needed by the Python app
+COPY requirements.txt /usr/src/app/
+RUN pip install --no-cache-dir -r /usr/src/app/requirements.txt
+
+# copy files required for the app to run
+COPY app.py /usr/src/app/
+COPY templates/index.html /usr/src/app/templates/
+
+# tell the port number the container should expose
+EXPOSE 5000
+
+# run the application
+CMD ["python", "/usr/src/app/app.py"]
+```
+
 ```shell
 $docker build –t mikegcoleman/catweb:2.0 .
 $docker push mikegcoleman/catweb:2.0
 ```
-![image](pptimages/image21.png)
 
 
 ---
-## Put it all together: Build, Ship, Run Workflow
+## Put it all together
 
+Build, Ship, Run Workflow
 ![image](pptimages/diagram.png)
 
 ---
