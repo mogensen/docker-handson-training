@@ -55,7 +55,7 @@ Fundamentally different benefits
 ## Some Docker vocabulary
 
 <div class="left">
-    <img srg="pptimages/image17.png"/>
+    ![image](pptimages/image17.png)
 </div>
 <div class="right">
     <ul>
