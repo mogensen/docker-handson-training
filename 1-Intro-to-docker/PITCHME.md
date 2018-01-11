@@ -53,7 +53,10 @@ Fundamentally different benefits
 
 ---
 ## Some Docker vocabulary
-
+![image](pptimages/image17.png)
+![image](pptimages/image18.png)
+![image](pptimages/image19.png)
+![image](pptimages/image20.png)
 
 | | |
 | --- | --- |
