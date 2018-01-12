@@ -15,5 +15,5 @@ ol li ol li {
 .reveal video,
 .reveal iframe {
   max-width: 40vw;
-  max-height: 40vh;
+  max-height: 35vh;
 }

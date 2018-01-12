@@ -33,13 +33,13 @@ https://github.com/christian-posta/docker-kubernetes-workshop
 
 ### Pull a docker image
 
-Pull Centos7 from DockerHub (http://hub.docker.com)
+Lets start by pulling Centos from DockerHub (http://hub.docker.com)
 
 Go to DockerHub and find the newest major version of the officiel centos image.
 When you have the newest version number you can run the following:
 
 ```shell
-docker pull centos:{version number}
+$ docker pull centos:{version number}
 ```
 
 This should result in something matching the following
@@ -61,7 +61,7 @@ Status: Downloaded newer image for centos:...
 To list the local use the docker images command:
 
 ```
-docker images
+$ docker images
 
 ceposta@postamac(~) $ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
@@ -87,19 +87,19 @@ Let's start by asking docker to run the centos image we have pulled, and to run 
 
 
 ```shell
-docker run --rm centos:{version from above} echo "hello from the docker world"
+$ docker run --rm centos:{version from above} echo "Hello from the docker world"
 
-hello from the docker world
+Hello from the docker world
 ```
 
 Woah, what happened? It just printed out "hello, world"? So what?
 
 Next let's ask docker to run an interactive shell inside a docker container:
 
-__Exercise__: Use `docker run --help` to figure out what `-it` and `--rm` does.
+__Exercise__: Use `docker run --help` to figure out what `-it` and `--rm` does. These two are very importaint when testing and developing new containers.
 
 ```
-docker run -it --rm centos:{version} bash
+$ docker run -it --rm centos:{version} bash
 
 [root@25fc15aa1cb9 /]# _
 ```
@@ -131,19 +131,21 @@ REDHAT_SUPPORT_PRODUCT_VERSION="7"
 Run some other commands from within the container:
 
 ```shell
-hostname -f         ## Get the name of the machine
-ps aux              ## List all processes on the machine
-yum -y install vim  ## Install vim
+$ hostname -f         ## Get the name of the machine
+$ ps aux              ## List all processes on the machine
+$ yum -y install vim  ## Install vim
 ```
 
 A real linux distro right? Did you notice that *`ps aux`* didn't show too many processes?
 
 ### Destroy all the stuff
 
+> **_WARNING:_ Make sure that you are IN the docker container and NOT in your local machines terminal !**
+
 Let's do some destructive stuff:
 
 ```shell
-rm -fr /usr/sbin
+$ rm -fr /usr/sbin
 ```
 
 Wuh? you deleted all of the sacred system tools!?
@@ -151,7 +153,7 @@ Wuh? you deleted all of the sacred system tools!?
 Let's delete some user tools too
 
 ```shell
-rm -fr /usr/bin
+$ rm -fr /usr/bin
 ```
 
 ```shell
@@ -164,22 +166,21 @@ Whoops... cannot *`ls`* or do anything useful anymore. What have we done!?
 No worries! Just *`exit`* the container and fire up a new one:
 
 ```
-docker run -it --rm centos:7 bash
+$ docker run -it --rm centos:{version number} bash
 ```
 
 Everything is back! Phew....
 
-We have all the tools again. But not vim.
+We now have all the tools again. But not vim.
 
 __Exercise__: Consider why we have all tools avaible again, except vim.
-
 
 ## Deploy Apache Tomcat
 
 Now let's run a JVM based application like Apache Tomcat:
 
 ```
-docker run --rm -p 8888:8080 tomcat:8.0
+$ docker run --rm -p 8888:8080 tomcat:8.0
 ```
 
 Since the Tomcat 8.0 docker image doesn't exist, Docker will try to automatically pull it from the registry.
@@ -200,7 +201,7 @@ Now we should be able to connect to *`http://localhost:{some port}`* and see tha
 
 __Exercise__: Figure out port and access the url in a browser.
 
-_If this did not work, you may be running docker in a virtual machine on your mac or windows machine. Then we need to mapped the Docker Host properly_
+_If this did not work, you may be running docker in a virtual machine on your mac or windows machine. Then we need to mapped the Docker Host ports properly._
 
 ## Exploring the Apache Tomcat Container
 
@@ -284,7 +285,7 @@ PID                 USER                TIME                COMMAND
 What about this one:
 
 ```
-docker inspect tomcat8
+$ docker inspect tomcat8
 ```
 
 Wow... that's a lot of information about the container! We can also use a `--format` template to pick out specific info
@@ -307,14 +308,14 @@ __Exercise__: Write a command that uses `docker inspect` and `--format` to figur
 Feel free to play around with the container a little bit more. When finished, stop the container:
 
 ```
-docker stop tomcat8
+$ docker stop tomcat8
 ```
 
 If you run `docker ps` you shouldn't see the container running any more. However, `docker run -a` will show all containers even the stopped ones.
 We can remove a container with:
 
 ```
-docker rm tomcat8
+$ docker rm tomcat8
 ```
 
 Then neither `docker ps` nor `docker ps -a` should show the container.

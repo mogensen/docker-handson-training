@@ -137,8 +137,6 @@ docker push mikegcoleman/catweb:2.0
 ---
 ## Put it all together
 
-_Build, Ship, Run Workflow_
-
 ![image](pptimages/diagram.png)
 
 ---
