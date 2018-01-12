@@ -1,5 +1,34 @@
 # My first Docker Exercises
 
+## About this exercise set
+
+> To help the users of this exercise to learn how to use docker and where to get help when they are stuck in the real world, I have tried to create exercises that forces the user to look in documentation and experiment.
+>
+> **This means, that the exercise set is not a simple copy & paste exercise**
+
+
+
+### Credits
+The exercises are build on exercises from the following workshop:
+https://github.com/christian-posta/docker-kubernetes-workshop
+
+
+## Table of content
+
+* [About this exercise set](#about-this-exercise-set)
+  + [Credits](#credits)
+* [Your First Docker](#your-first-docker)
+  + [Pull a docker image](#pull-a-docker-image)
+  + [List locally, installed images](#list-locally--installed-images)
+  + [Running the Docker container](#running-the-docker-container)
+  + [Destroy all the stuff](#destroy-all-the-stuff)
+* [Deploy Apache Tomcat](#deploy-apache-tomcat)
+* [Exploring the Apache Tomcat Container](#exploring-the-apache-tomcat-container)
+  + [Playing with flags](#playing-with-flags)
+  + [Stop and Remove container](#stop-and-remove-container)
+
+<!-- https://ecotrust-canada.github.io/markdown-toc/ -->
+
 ## Your First Docker
 
 ### Pull a docker image
