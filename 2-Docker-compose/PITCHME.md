@@ -4,14 +4,13 @@
 ## About me
 ### Frederik Mogensen
 
-
 <div class="left-col-big">
 Software Pilot at Trifork
 <br>
 <i>Focus on Docker, orchestration and ci/cd</i>
 </div>
 <div class="right-col-small">
-![image](assets/images/image10.jpeg)
+![image](assets/images/me.jpeg)
 </div>
 
 ---

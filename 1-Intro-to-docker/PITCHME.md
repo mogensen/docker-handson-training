@@ -4,24 +4,14 @@
 ## About me
 ### Frederik Mogensen
 
+<div class="left-col-big">
 Software Pilot at Trifork
-Focus on Docker, orchestration and ci/cd
-
-![image](assets/images/image10.jpeg)
-
----
-## Agenda
-
-- Containers are NOT VMs
-- Working with Docker (Build, Ship, Run)
-- Container Architecture
-- But Why?
-- Multi-container applications
-
-- Docker Compose
-- Docker Swarm
-- Getting started
-- Q & A
+<br>
+<i>Focus on Docker, orchestration and ci/cd</i>
+</div>
+<div class="right-col-small">
+![image](assets/images/me.jpeg)
+</div>
 
 ---
 # Containers are not VMs
