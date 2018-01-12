@@ -1,0 +1,19 @@
+.reveal .slides {
+  width: 95% !important;
+}
+ul li ul li {
+  font-size: 60% !important;
+}
+ol li ul li {
+  font-size: 60% !important;
+}
+ol li ol li {
+  font-size: 60% !important;
+}
+
+.reveal img,
+.reveal video,
+.reveal iframe {
+  max-width: 40vw;
+  max-height: 35vh;
+}

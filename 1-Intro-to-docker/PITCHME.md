@@ -7,7 +7,7 @@
 Software Pilot at Trifork
 Focus on Docker, orchestration and ci/cd
 
-![image](pptimages/image10.jpeg)
+![image](assets/images/image10.jpeg)
 
 ---
 ## Agenda
@@ -36,17 +36,17 @@ Focus on Docker, orchestration and ci/cd
 ---
 ## VMs
 
-![image](pptimages/image12.png)
+![image](assets/images/image12.png)
 
 ---
 ## Containers
 
-![image](pptimages/image13.png)
+![image](assets/images/image13.png)
 
 ---
 ## They’re different, not mutually exclusive
 
-![image](pptimages/image14.png)
+![image](assets/images/image14.png)
 
 
 ---
@@ -64,10 +64,10 @@ Focus on Docker, orchestration and ci/cd
 - Registry Service
   - Cloud or server based storage and distribution of images
 
-![image](pptimages/image18.png)
-![image](pptimages/image17.png)
-![image](pptimages/image19.png)
-![image](pptimages/image20.png)
+![image](assets/images/image18.png)
+![image](assets/images/image17.png)
+![image](assets/images/image19.png)
+![image](assets/images/image20.png)
 
 ---
 ## Basic Docker Commands
@@ -137,7 +137,7 @@ docker push mikegcoleman/catweb:2.0
 ---
 ## Put it all together
 
-![image](pptimages/diagram.png)
+![image](assets/images/diagram.png)
 
 ---
 ## Demo
@@ -165,7 +165,7 @@ Browse to port 5000 on your machine: http://localhost:5000
 ---
 ## Image Layers
 
-![image](pptimages/catweb-layers.png)
+![image](assets/images/catweb-layers.png)
 
 ---
 ## Docker File System
@@ -217,7 +217,7 @@ ___For all applications___
 ## Docker Datacenter
 _Containers in production_
 
-![image](pptimages/ucp.png)
+![image](assets/images/ucp.png)
 
 Note:
 - Enterprise container orchestration, management and security for dev and ops
