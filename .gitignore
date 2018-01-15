@@ -3,3 +3,4 @@
 3-Docker-swarm/assets/
 2-Docker-compose/1-compose/docker-compose.yml
 *.pptx
+**/cheat/*

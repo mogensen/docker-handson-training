@@ -26,8 +26,10 @@ Add two services in the `docker-compose.yml` file to run:
 Standing in the directory where the `docker-compose.yml` file is, we can execute the following
 
 ```shell
-## Build all services that use the `build` notation
+
+# Build all services that use the `build` notation
 $ docker-compose build
+
 # Start all services that are described in the `docker-compose.yml` file
 $ docker-compose up
 ```
@@ -42,6 +44,7 @@ Now you should be able to access the following:
 ```shell
 ## Build all services that use the `build` notation
 $ docker-compose stop
+
 # Start all services that are described in the `docker-compose.yml` file
 $ docker-compose rm
 ```
@@ -55,4 +58,23 @@ Now try stopping and removing the stack. Start it agin and observe the counter.
 
 ### Publishing to a Docker repository
 
+Follow the official Docker documentation to publish the python addition server to your docker hub account.
+_Note_: Create a docker account if you do not already have one.
 
+https://docs.docker.com/docker-cloud/builds/push-images/
+
+Now change your `docker-compose.yml` file to use the published image instead of the locally build version.
+Test that it works as expected.
+
+### Host it online
+
+Now it's time to expose our fantastic AaaS (Addition-as-a-service) to the world!
+Go to play-with-docker.com and login with your docker login from docker hub.
+
+Create a new instance of a server in the left hand menu. Copy and paste your `docker-compose.yml` file to the server.
+
+Run `docker-compose up` and check that docker downloads the two images needed from docker hub, and starts the containers.
+
+Now you should see a blue port number in the top of the dashboard. Click the port to go to the endpoint for your new hosted docker container.
+
+__Congratulations!__ You now have a distributed, cloud native, container hosted application with all configurations needed expressed as code.
