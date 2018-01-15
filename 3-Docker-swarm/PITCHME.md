@@ -163,7 +163,7 @@ Software Pilot at Trifork
 # Docker Swarm
 
 ---
-## Core consepts
+## Core concepts
 
 <div class="clearfix">
   <div class="left-col">
@@ -268,7 +268,7 @@ Software Pilot at Trifork
 ## Networks
 
 <div class="left-col">
-Develope-editon
+Developer-edition
 
 ![image](assets/images/swarm_network_simple.png)
 </div>
@@ -284,9 +284,14 @@ Network-guy-edition
 ## Secrets
 
 ```shell
-$ echo "This is a secret" | docker secret create my_secret –
-$ docker service create --name redis --secret my_secret redis:alpine
-$ docker exec $(docker ps --filter name=redis -q) cat /run/secrets/my_secret
+$ echo "This is a secret" \
+  | docker secret create my_secret –
+
+$ docker service create --name redis \
+  --secret my_secret redis:alpine
+
+$ docker exec redis \
+  cat /run/secrets/my_secret
 
 This is a secret
 ```
