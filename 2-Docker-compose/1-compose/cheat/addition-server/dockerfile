@@ -1,0 +1,11 @@
+FROM python:2.7-alpine
+
+## Install web.py package
+RUN pip install web.py
+RUN pip install redis
+
+# Add shell script
+COPY addition.py /
+
+# Command to run when starting server
+CMD ["python", "addition.py"]

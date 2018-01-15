@@ -1,0 +1,79 @@
+version: "3"
+services:
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379"
+    networks:
+      - public_vote
+    deploy:
+      placement:
+        constraints:
+          - node.labels.disk == hdd
+
+  db:
+    image: postgres:9.4
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - private_result
+    deploy:
+      placement:
+        constraints:
+          - node.labels.disk == ssd
+
+  vote:
+    image: dockersamples/examplevotingapp_vote:before
+    ports:
+      - 5000:80
+    depends_on:
+      - redis
+    deploy:
+      replicas: 5
+      placement:
+        constraints:
+          - node.labels.disk == hdd
+    networks:
+      - public_vote
+
+  result:
+    image: dockersamples/examplevotingapp_result:before
+    ports:
+      - 5001:80
+    depends_on:
+      - db
+    networks:
+      - private_result
+    deploy:
+      placement:
+        constraints:
+          - node.labels.disk == hdd
+
+  worker:
+    image: dockersamples/examplevotingapp_worker
+    depends_on:
+      - db
+      - redis
+    networks:
+      - public_vote
+      - private_result
+    deploy:
+      placement:
+        constraints:
+          - node.labels.disk == hdd
+
+volumes:
+  db-data:
+
+networks:
+  public_vote:
+  private_result:
+
+
+networks:
+  private:
+    driver: overlay
+    driver_opts:
+      encrypted: "true"
+  public:

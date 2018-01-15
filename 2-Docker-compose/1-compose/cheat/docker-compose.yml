@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  # Add service description for redis cache version 3 here
+  redis:
+    image: redis:3
+
+  # Add service description for python application here.
+  # Using `build` and not `image`
+  # Remember port mappings
+  app:
+    build: addition-server
+    ports:
+      - 8080:8080

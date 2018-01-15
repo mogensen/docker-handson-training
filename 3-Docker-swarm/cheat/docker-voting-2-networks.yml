@@ -1,0 +1,52 @@
+version: "3"
+services:
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379"
+    networks:
+      - frontend
+
+  db:
+    image: postgres:9.4
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - backend
+
+  vote:
+    image: dockersamples/examplevotingapp_vote:before
+    ports:
+      - 5000:80
+    depends_on:
+      - redis
+    deploy:
+      replicas: 5
+    networks:
+      - frontend
+
+  result:
+    image: dockersamples/examplevotingapp_result:before
+    ports:
+      - 5001:80
+    depends_on:
+      - db
+    networks:
+      - backend
+
+  worker:
+    image: dockersamples/examplevotingapp_worker
+    depends_on:
+      - db
+      - redis
+    networks:
+      - frontend
+      - backend
+
+volumes:
+  db-data:
+
+networks:
+  frontend:
+  backend:
