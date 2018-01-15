@@ -218,4 +218,40 @@ Note:
 ---
 ## Hands On
 
+#### Playing with docker containers
+
 #### Exercises [here](https://github.com/mogensen/docker-handson-training/tree/master/1-Intro-to-docker/Exercises.md)
+
+---
+## Building images
+
+---
+## Docker Swarm Cheat Sheet
+
+Building
+
+```shell
+$ docker build -t my-image .
+$ docker build -t my-image -f my.dockerfile .
+```
+
+Running
+
+```shell
+$ docker run my-image
+$ docker run -p 9000:8080 --name my-container my-image
+```
+
+Cleanup
+
+```shell
+$ docker stop my-container // Or container id from docker ps
+$ docker rm my-container   // Or container id from docker ps
+```
+
+---
+## Hands On
+
+#### Creating images
+
+#### Exercises [here](https://github.com/mogensen/docker-handson-training/tree/master/1-Intro-to-docker/1-building-images)

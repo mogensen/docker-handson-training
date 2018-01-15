@@ -297,6 +297,7 @@ This is a secret
 ![image](assets/images/swarm_secrets.png)
 
 <small>https://blog.docker.com/2017/02/docker-secrets-management/</small>
+
 ---
 ## Docker Swarm Cheat Sheet
 
@@ -307,6 +308,7 @@ $ docker swarm init --advertise-addr $IP/$NET_INTERFACE
 $ docker swarm join --token SWMTKN-1-49n… $MANAGER_IP:2377
 $ docker swarm leave
 ```
+
 Node
 
 ```shell
