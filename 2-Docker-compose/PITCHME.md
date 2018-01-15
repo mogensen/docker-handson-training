@@ -94,4 +94,4 @@ $ docker-compose stop
 ---
 ## Hands On
 
-#### Exercises [here](https://github.com/mogensen/docker-handson-training/tree/master/2-Docker-compose/Exercises.md)
+#### Exercises [here](https://github.com/mogensen/docker-handson-training/tree/master/2-Docker-compose/1-compose)

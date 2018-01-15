@@ -6,8 +6,6 @@
 >
 > **This means, that the exercise set is not a simple copy & paste exercise**
 
-
-
 ### Credits
 The exercises are build on exercises from the following workshop:
 https://github.com/christian-posta/docker-kubernetes-workshop

@@ -220,7 +220,7 @@ Note:
 
 #### Playing with docker containers
 
-#### Exercises [here](https://github.com/mogensen/docker-handson-training/tree/master/1-Intro-to-docker/Exercises.md)
+#### Exercises [here](https://github.com/mogensen/docker-handson-training/tree/master/1-Intro-to-docker/1-running-containers)
 
 ---
 ## Building images
@@ -254,4 +254,4 @@ $ docker rm my-container   // Or container id from docker ps
 
 #### Creating images
 
-#### Exercises [here](https://github.com/mogensen/docker-handson-training/tree/master/1-Intro-to-docker/1-building-images)
+#### Exercises [here](https://github.com/mogensen/docker-handson-training/tree/master/1-Intro-to-docker/2-building-images)
