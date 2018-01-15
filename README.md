@@ -19,7 +19,7 @@
 
 [Slides for Docker Compose](https://gitpitch.com/mogensen/docker-handson-training/master?grs=github&t=moon&p=2-Docker-compose)
 
-[Exercises](2-Docker-compose/Exercises.md)
+[Exercises](2-Docker-compose/1-compose)
 
 ### Part 3
 

@@ -35,7 +35,7 @@ $ docker run --name=wp -p 8000:80 --link db:db \
 
 @[1](Pull mysql container)
 @[3](Pull wordpress container)
-@[5](Start mysql container namd `db` with root password)
+@[5](Start mysql container named `db` with root password)
 @[7-9](Start wordpress container linked with `db` container)
 
 ---
