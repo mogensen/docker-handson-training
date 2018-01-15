@@ -226,7 +226,7 @@ Note:
 ## Building images
 
 ---
-## Docker Swarm Cheat Sheet
+## Docker Cheat Sheet
 
 Building
 
