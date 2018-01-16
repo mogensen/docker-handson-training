@@ -490,15 +490,32 @@ _And also `docker-compose stop`_
 ---
 ## When to (not) use tags
 
-Don't specify tags:
+- Don't specify tags:
+  - When doing rapid testing and prototyping.
+  - When experimenting.
+  - When you want the latest version.
 
-- When doing rapid testing and prototyping.
-- When experimenting.
-- When you want the latest version.
+- Do specify tags:
+  - When recording a procedure into a script.
+  - When going to production.
+  - To ensure that the same version will be used everywhere.
+  - To ensure repeatability later.
 
-Do specify tags:
+---
+# Automated builds
 
-- When recording a procedure into a script.
-- When going to production.
-- To ensure that the same version will be used everywhere.
-- To ensure repeatability later.
+---
+### The goodness of automated builds
+
+- You can link a Docker Hub repository with a GitHub or BitBucket repository
+- Each push to GitHub or BitBucket will trigger a build on Docker Hub
+- If the build succeeds, the new image is available on Docker Hub
+- You can map tags and branches between source and container images
+- If you work with public repositories, this is free
+
+---
+## Hands On
+
+#### Automated builds
+
+#### Exercises [here](https://github.com/mogensen/docker-handson-training/tree/master/1.2-Docker-building/2-automated-builds)
