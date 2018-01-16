@@ -18,6 +18,10 @@
 
 [Exercises](1.2-Docker-building/1-building-images)
 
+### Part 1.3
+
+[Slides for Efficient Dockerfiles](https://gitpitch.com/mogensen/docker-handson-training/master?grs=github&t=moon&p=1.3-Docker-files)
+
 ### Part 2
 
 [Slides for Docker Compose](https://gitpitch.com/mogensen/docker-handson-training/master?grs=github&t=moon&p=2-Docker-compose)
