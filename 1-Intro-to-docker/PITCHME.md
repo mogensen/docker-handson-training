@@ -144,10 +144,163 @@ Build, Ship, and Run
 - After Docker is installed, run Catweb
 
 ```shell
-$ docker run –d –p 5000:5000 --name catweb mikegcoleman/catweb
+$ docker run –p 5000:5000 --name catweb mikegcoleman/catweb
 ```
 
 Browse to port 5000 on your machine: http://localhost:5000
+
+---
+# Background containers
+
+---
+
+## Objectives
+
+Our first containers were *interactive*.
+
+We will now see how to:
+
+* Run a non-interactive container.
+* Run a container in the background.
+* List running containers.
+* Check the logs of a container.
+* Stop a container.
+* List stopped containers.
+
+---
+
+## A non-interactive container
+
+We will run a small custom container.
+
+This container just displays the time every second.
+
+```bash
+$ docker run jpetazzo/clock
+Fri Feb 20 00:28:53 UTC 2015
+Fri Feb 20 00:28:54 UTC 2015
+Fri Feb 20 00:28:55 UTC 2015
+...
+```
+
+* This container will run forever.
+* To stop it, press `^C`.
+
+Note:
+
+* Docker has automatically downloaded the image `jpetazzo/clock`.
+* This image is a user image, created by `jpetazzo`.
+* We will hear more about user images (and other types of images) later.
+
+---
+
+## Run a container in the background
+
+Containers can be started in the background, with the `-d` flag (daemon mode):
+
+```bash
+$ docker run -d jpetazzo/clock
+47d677dcfba4277c6cc68fcaa51f932b544cab1a187c853b7d0caf4e8debe5ad
+```
+
+* We don't see the output of the container.
+* But don't worry: Docker collects that output and logs it!
+* Docker gives us the ID of the container.
+
+---
+
+## List running containers
+
+How can we check that our container is still running?
+
+With `docker ps`, just like the UNIX `ps` command, lists running processes.
+
+```bash
+$ docker ps
+CONTAINER ID  IMAGE           ...  CREATED        STATUS        ...
+47d677dcfba4  jpetazzo/clock  ...  2 minutes ago  Up 2 minutes  ...
+```
+
+Note:
+
+Docker tells us:
+
+* The (truncated) ID of our container.
+* The image used to start the container.
+* That our container has been running (`Up`) for a couple of minutes.
+* Other information (COMMAND, PORTS, NAMES) that we will explain later.
+
+---
+
+## Starting more containers
+
+Let's start two more containers.
+
+```bash
+$ docker run -d jpetazzo/clock
+57ad9bdfc06bb4407c47220cf59ce21585dce9a1298d7a67488359aeaea8ae2a
+```
+
+```bash
+$ docker run -d jpetazzo/clock
+068cc994ffd0190bbe025ba74e4c0771a5d8f14734af772ddee8dc1aaf20567d
+```
+
+Check that `docker ps` correctly reports all 3 containers.
+
+---
+## View the logs of a container
+
+Docker collects all logs from the containers output.
+
+Let's see that now.
+
+```bash
+$ docker logs 068
+Fri Feb 20 00:39:52 UTC 2015
+Fri Feb 20 00:39:53 UTC 2015
+...
+```
+
+Note:
+* We specified a *prefix* of the full container ID.
+* You can, of course, specify the full ID.
+* The `logs` command will output the *entire* logs of the container.
+
+---
+## View only the tail of the logs
+
+To avoid being spammed with eleventy pages of output,
+we can use the `--tail` option:
+
+```bash
+$ docker logs --tail 3 068
+Fri Feb 20 00:55:35 UTC 2015
+Fri Feb 20 00:55:36 UTC 2015
+Fri Feb 20 00:55:37 UTC 2015
+```
+
+Note:
+
+* The parameter is the number of lines that we want to see.
+
+---
+
+## Follow the logs in real time
+
+Just like with the standard UNIX command `tail -f`, we can
+follow the logs of our container:
+
+```bash
+$ docker logs --tail 1 --follow 068
+Fri Feb 20 00:57:12 UTC 2015
+Fri Feb 20 00:57:13 UTC 2015
+^C
+```
+
+* This will display the last line in the log file.
+* Then, it will continue to display the logs in real time.
+* Use `^C` to exit.
 
 ---
 ## Docker Container Architecture
@@ -267,6 +420,13 @@ _And also `docker-compose stop`_
 
 > The main process inside the container will receive `SIGTERM`, and after a grace period, `SIGKILL`.
 
+
+---
 ### `addition.py`
 
 `web.py` does not handle `SIGTERM` out of the box.
+
+- Docker sends the `SIGTERM` signal
+- the container doesn't react to this signal
+- 10 seconds later, since the container is still running, Docker sends the `SIGKILL` signal
+- this terminates the container

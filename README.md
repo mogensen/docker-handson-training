@@ -28,7 +28,21 @@
 
 [Exercises](3-Docker-swarm/Exercises.md)
 
+### Part 4
+
+[Slides for Docker Swarm](https://gitpitch.com/mogensen/docker-handson-training/master?grs=github&t=moon&p=4-Microservice)
+
+
 ## I need more help - please
 
 If you are stuck in the exercises there is a branch called _"i\_need\_to\_cheat"_.
 This branch contains the solutions for most of the exercises.
+
+## Credit
+
+These sides and exercises are build on top of giants!
+
+- https://www.slideshare.net/Docker/docker-101-nov-2016
+- https://github.com/jpetazzo/container.training
+- https://blog.codeship.com/microservices-best-practices/
+- https://martinfowler.com/microservices/
