@@ -280,6 +280,57 @@ Network-guy-edition
 
 <small>http://blog.nigelpoulton.com/demystifying-docker-overlay-networking/</small>
 
+Note:
+
+We will learn about the CNM (Container Network Model).
+
+At the end of this lesson, you will be able to:
+
+* Create a private network for a group of containers.
+* Use container naming to connect services together.
+* Dynamically connect and disconnect containers to networks.
+* Set the IP address of a container.
+
+We will also explain the principle of overlay networks and network plugins.
+
+---
+
+## The Container Network Model
+
+The CNM was introduced in Engine 1.9.0 (November 2015).
+
+The CNM adds the notion of a *network*, and a new top-level command to manipulate and see those networks: `docker network`.
+
+```bash
+$ docker network ls
+NETWORK ID          NAME                DRIVER
+6bde79dfcf70        bridge              bridge
+8d9c78725538        none                null
+eb0eeab782f4        host                host
+4c1ff84d6d3f        blog-dev            overlay
+228a4355d548        blog-prod           overlay
+```
+
+---
+## What's in a network?
+
+* Conceptually, a network is a virtual switch.
+* It can be local (to a single Engine) or global (spanning multiple hosts).
+* A network has an IP subnet associated to it.
+* Docker will allocate IP addresses to the containers connected to a network.
+* Containers can be connected to multiple networks.
+* Containers can be given per-network names and aliases.
+* The names and aliases can be resolved via an embedded DNS server.
+
+---
+## Network implementation details
+
+* A network is managed by a *driver*.
+* All the drivers that we have seen before are available.
+* A new multi-host driver, *overlay*, is available out of the box.
+* More drivers can be provided by plugins (OVS, VLAN...)
+* A network can have a custom IPAM (IP allocator).
+
 ---
 ## Secrets
 

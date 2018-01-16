@@ -92,6 +92,18 @@ $ docker-compose stop
 ```
 
 ---
+# Usages of Compose
+
+---
+## Compose Use cases
+
+- Document how to start a given image.
+  - ports, configuration, networks, ip, privileges
+- Development replacement for a cluster
+  - Startup all/needed services in microservice application
+- Starting multi-container application on server
+
+---
 ## Hands On
 
 #### Exercises [here](https://github.com/mogensen/docker-handson-training/tree/master/2-Docker-compose/1-compose)

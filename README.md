@@ -30,6 +30,13 @@
 
 [Exercises for automated builds](2-Docker-compose/2-automated-builds)
 
+
+### Part 2.1
+
+[Slides for Volumes](https://gitpitch.com/mogensen/docker-handson-training/master?grs=github&t=moon&p=2.1-Docker-local-development)
+
+[Exercises for Volumes](2.1-Docker-local-development/1-volume)
+
 ### Part 3
 
 [Slides for Docker Swarm](https://gitpitch.com/mogensen/docker-handson-training/master?grs=github&t=moon&p=3-Docker-swarm)
