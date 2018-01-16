@@ -21,6 +21,9 @@ RESULT=$(($1+$2))
 echo "$1 + $2 = $RESULT"
 ```
 
+_Note:_ alpine linux does NOT like scripts with windows carriage returns in.
+Make sure that the file ONLY has unix line breaks in it.
+
 ### `dockerfile`
 
 ```dockerfile

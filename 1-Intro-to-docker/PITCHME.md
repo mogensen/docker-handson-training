@@ -255,3 +255,18 @@ $ docker rm my-container   // Or container id from docker ps
 #### Creating images
 
 #### Exercises [here](https://github.com/mogensen/docker-handson-training/tree/master/1-Intro-to-docker/2-building-images)
+
+---
+## Docker Stop
+
+Did you notice that the `docker-compose stop` took a long time for the python app?
+
+---
+## `docker stop`
+_And also `docker-compose stop`_
+
+> The main process inside the container will receive `SIGTERM`, and after a grace period, `SIGKILL`.
+
+### `addition.py`
+
+`web.py` does not handle `SIGTERM` out of the box.
