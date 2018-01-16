@@ -306,20 +306,45 @@ Fri Feb 20 00:57:13 UTC 2015
 ## Docker Container Architecture
 
 ---
-## Image Layers
+
+## What is an image?
+
+- Image = files + metadata
+- These files form the root filesystem of our container.
+- The metadata can indicate a number of things, e.g.:
+  - the author of the image
+  - the command to execute in the container when starting it
+  - environment variables to be set
+  - etc.
+* Images are made of *layers*, conceptually stacked on top of each other.
+* Each layer can add, change, and remove files and/or metadata.
+* Images can share layers to optimize disk usage, transfer times, and memory use.
+
+---
+## Differences between containers and images
+
+* An image is a read-only filesystem.
+* A container is an encapsulated set of processes running in a
+  read-write copy of that filesystem.
+* To optimize container boot time, *copy-on-write* is used 
+  instead of regular copy.
+* `docker run` starts a container from a given image.
+
+---
+## Example of Catweb Image Layers
 
 ![image](assets/images/catweb-layers.png)
 
 ---
 ## Docker File System
 
-- Logical file system by grouping different file system primitives into branches (directories, file systems, subvolumes, snapshots)
+If an image is read-only, how do we change it?
 
-- Each branch represents a layer in a Docker image
-
-- Allows images to be constructed / deconstructed as needed vs. a huge monolithic image (ala traditional virtual machines)
-
-- When a container is started a writeable layer is added to the “top” of the file system
+- We don't.
+- We create a new container from that image.
+- Then we make changes to that container.
+- When we are satisfied with those changes, we transform them into a new layer.
+- A new image is created by stacking the new layer on top of the old image.
 
 ---
 ## Copy on Write
@@ -339,11 +364,96 @@ Fri Feb 20 00:57:13 UTC 2015
 - Volumes allow you to specify a directory in the container that exists outside of the
 docker file system structure
 - Can be used to share (and persist) data between containers
-
 - Directory persists after the container is deleted
   - Unless you explicitly delete it
-
 - Can be created in a Dockerfile or via CLI
+
+---
+## Images namespaces
+
+There are three namespaces:
+
+* Official images
+
+    e.g. `ubuntu`, `busybox` ...
+
+* User (and organizations) images
+
+    e.g. `jpetazzo/clock`
+
+* Self-hosted images
+
+    e.g. `registry.example.com:5000/my-private/image`
+
+Let's explain each of them.
+
+---
+## Root namespace
+
+The root namespace is for official images. They are put there by Docker Inc.,
+but they are generally authored and maintained by third parties.
+
+Those images include:
+
+* Small, "swiss-army-knife" images like busybox.
+* Distro images to be used as bases for your builds, like ubuntu, fedora...
+* Ready-to-use components and services, like redis, postgresql...
+
+---
+## User namespace
+
+The user namespace holds images for Docker Hub users and organizations.
+
+For example:
+
+```bash
+jpetazzo/clock
+```
+
+The Docker Hub user is:
+
+```bash
+jpetazzo
+```
+
+The image name is:
+
+```bash
+clock
+```
+
+---
+## Self-Hosted namespace
+
+This namespace holds images which are not hosted on Docker Hub, but on third
+party registries.
+
+They contain the hostname (or IP address), and optionally the port, of the
+registry server.
+
+For example:
+
+```bash
+localhost:5000/wordpress
+```
+
+* `localhost:5000` is the host and port of the registry
+* `wordpress` is the name of the image
+
+---
+## How do you store and manage images?
+
+Images can be stored:
+
+* On your Docker host.
+* In a Docker registry.
+
+You can use the Docker client to download (pull) or upload (push) images.
+
+Note:
+
+To be more accurate: you can use the Docker client to tell a Docker Engine
+to push and pull images to and from a registry.
 
 ---
 ## One platform - one journey
@@ -374,59 +484,3 @@ Note:
 #### Playing with docker containers
 
 #### Exercises [here](https://github.com/mogensen/docker-handson-training/tree/master/1-Intro-to-docker/1-running-containers)
-
----
-## Building images
-
----
-## Docker Cheat Sheet
-
-Building
-
-```shell
-$ docker build -t my-image .
-$ docker build -t my-image -f my.dockerfile .
-```
-
-Running
-
-```shell
-$ docker run my-image
-$ docker run -p 9000:8080 --name my-container my-image
-```
-
-Cleanup
-
-```shell
-$ docker stop my-container // Or container id from docker ps
-$ docker rm my-container   // Or container id from docker ps
-```
-
----
-## Hands On
-
-#### Creating images
-
-#### Exercises [here](https://github.com/mogensen/docker-handson-training/tree/master/1-Intro-to-docker/2-building-images)
-
----
-## Docker Stop
-
-Did you notice that the `docker-compose stop` took a long time for the python app?
-
----
-## `docker stop`
-_And also `docker-compose stop`_
-
-> The main process inside the container will receive `SIGTERM`, and after a grace period, `SIGKILL`.
-
-
----
-### `addition.py`
-
-`web.py` does not handle `SIGTERM` out of the box.
-
-- Docker sends the `SIGTERM` signal
-- the container doesn't react to this signal
-- 10 seconds later, since the container is still running, Docker sends the `SIGKILL` signal
-- this terminates the container

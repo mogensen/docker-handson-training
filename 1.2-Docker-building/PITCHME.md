@@ -1,4 +1,4 @@
-# Introduction to Docker
+# Building with Docker
 
 ---
 ## About me
@@ -45,15 +45,13 @@ CMD figlet -f script hello
 ```
 
 * `CMD` defines a default command to run when none is given.
-
 * It can appear at any point in the file.
-
 * Each `CMD` will replace and override the previous one.
 
+Note:
 * As a result, while you can have multiple `CMD` lines, it is useless.
 
 ---
-
 ## Build and test our image
 
 Let's build it:
@@ -88,7 +86,6 @@ root@7ac86a641116:/#
 ```
 
 * We specified `bash`.
-
 * It replaced the value of `CMD`.
 
 ---
@@ -116,8 +113,6 @@ We will use the `ENTRYPOINT` verb in Dockerfile.
 
 ## Adding `ENTRYPOINT` to our Dockerfile
 
-Our new Dockerfile will look like this:
-
 ```dockerfile
 FROM ubuntu
 RUN apt-get update
@@ -126,16 +121,12 @@ ENTRYPOINT ["figlet", "-f", "script"]
 ```
 
 * `ENTRYPOINT` defines a base command (and its parameters) for the container.
-
 * The command line arguments are appended to those parameters.
 
+Note:
+
 * Like `CMD`, `ENTRYPOINT` can appear anywhere, and replaces the previous value.
-
 Why did we use JSON syntax for our `ENTRYPOINT`?
-
----
-
-## Implications of JSON vs string syntax
 
 * When CMD or ENTRYPOINT use string syntax, they get wrapped in `sh -c`.
 
@@ -180,14 +171,8 @@ $ docker run figlet salut
 
 ## Using `CMD` and `ENTRYPOINT` together
 
-What if we want to define a default message for our container?
-
-Then we will use `ENTRYPOINT` and `CMD` together.
-
 * `ENTRYPOINT` will define the base command for our container.
-
 * `CMD` will define the default parameter(s) for this command.
-
 * They *both* have to use JSON syntax.
 
 ---
@@ -204,6 +189,7 @@ ENTRYPOINT ["figlet", "-f", "script"]
 CMD ["hello world"]
 ```
 
+Note: 
 * `ENTRYPOINT` defines a base command (and its parameters) for the container.
 
 * If we don't specify extra command-line arguments when starting the container,
@@ -272,21 +258,6 @@ root@6027e44e2955:/#
 
 ---
 
-## Objectives
-
-So far, we have installed things in our container images
-by downloading packages.
-
-We can also copy files from the *build context* to the
-container that we are building.
-
-Remember: the *build context* is the directory containing
-the Dockerfile.
-
-In this chapter, we will learn a new Dockerfile keyword: `COPY`.
-
----
-
 ## Build some C code
 
 We want to build a container that compiles a basic "Hello world" program in C.
@@ -308,12 +279,6 @@ Then we will write the Dockerfile.
 
 ## The Dockerfile
 
-On Debian and Ubuntu, the package `build-essential` will get us a compiler.
-
-When installing it, don't forget to specify the `-y` flag, otherwise the build will fail (since the build cannot be interactive).
-
-Then we will use `COPY` to place the source file into the container.
-
 ```bash
 FROM ubuntu
 RUN apt-get update
@@ -323,7 +288,11 @@ RUN make hello
 CMD /hello
 ```
 
-Create this Dockerfile.
+@[3]On Debian and Ubuntu, the package `build-essential` will get us a compiler.
+
+@[3]When installing it, don't forget to specify the `-y` flag, otherwise the build will fail (since the build cannot be interactive).
+
+@[4]Then we will use `COPY` to place the source file into the container.
 
 ---
 
@@ -445,6 +414,91 @@ List our images with `docker images`, and check the size of:
 
 We can achieve even smaller images if we use smaller base images.
 
+Note:
+
 However, if we use common base images (e.g. if we standardize on `ubuntu`),
 these common images will be pulled only once per node, so they are
 virtually "free."
+
+---
+## Building images
+
+---
+## Docker Cheat Sheet
+
+Building
+
+```shell
+$ docker build -t my-image .
+$ docker build -t my-image -f my.dockerfile .
+```
+
+Running
+
+```shell
+$ docker run my-image
+$ docker run -p 9000:8080 --name my-container my-image
+```
+
+Cleanup
+
+```shell
+$ docker stop my-container // Or container id from docker ps
+$ docker rm my-container   // Or container id from docker ps
+```
+
+---
+## Hands On
+
+#### Creating images
+
+#### Exercises [here](https://github.com/mogensen/docker-handson-training/tree/master/1.2-Docker-building/2-building-images)
+
+---
+## Docker Stop
+
+Did you notice that the `docker-compose stop` took a long time for the python app?
+
+---
+## `docker stop`
+_And also `docker-compose stop`_
+
+> The main process inside the container will receive `SIGTERM`, and after a grace period, `SIGKILL`.
+
+
+---
+### `addition.py`
+
+`web.py` does not handle `SIGTERM` out of the box.
+
+- Docker sends the `SIGTERM` signal
+- the container doesn't react to this signal
+- 10 seconds later, since the container is still running, Docker sends the `SIGKILL` signal
+- this terminates the container
+
+---
+# Image and tags
+
+---
+## Image and tags
+
+- Images can have tags.
+- Tags define image versions or variants.
+- `docker pull ubuntu` will refer to `ubuntu:latest`.
+- The `:latest` tag is generally updated often.
+
+---
+## When to (not) use tags
+
+Don't specify tags:
+
+- When doing rapid testing and prototyping.
+- When experimenting.
+- When you want the latest version.
+
+Do specify tags:
+
+- When recording a procedure into a script.
+- When going to production.
+- To ensure that the same version will be used everywhere.
+- To ensure repeatability later.

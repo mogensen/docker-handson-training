@@ -10,11 +10,13 @@
 
 [Slides for Intro to Docker](https://gitpitch.com/mogensen/docker-handson-training/master?grs=github&t=moon&p=1-Intro-to-docker)
 
-#### Exercises
+[Exercises](1-Intro-to-docker/1-running-containers)
 
-[1. Running Container](1-Intro-to-docker/1-running-containers)
+### Part 1.2
 
-[2. Building Images](1-Intro-to-docker/2-building-images)
+[Slides for Building Images](https://gitpitch.com/mogensen/docker-handson-training/master?grs=github&t=moon&p=1.2-Docker-building)
+
+[Exercises](1.2-Docker-building/1-building-images)
 
 ### Part 2
 
