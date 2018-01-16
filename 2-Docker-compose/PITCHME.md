@@ -95,3 +95,22 @@ $ docker-compose stop
 ## Hands On
 
 #### Exercises [here](https://github.com/mogensen/docker-handson-training/tree/master/2-Docker-compose/1-compose)
+
+---
+# Automated builds
+
+---
+### The goodness of automated builds
+
+- You can link a Docker Hub repository with a GitHub or BitBucket repository
+- Each push to GitHub or BitBucket will trigger a build on Docker Hub
+- If the build succeeds, the new image is available on Docker Hub
+- You can map tags and branches between source and container images
+- If you work with public repositories, this is free
+
+---
+## Hands On
+
+#### Automated builds
+
+#### Exercises [here](https://github.com/mogensen/docker-handson-training/tree/master/2-Docker-compose/2-automated-builds)

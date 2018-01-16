@@ -26,7 +26,9 @@
 
 [Slides for Docker Compose](https://gitpitch.com/mogensen/docker-handson-training/master?grs=github&t=moon&p=2-Docker-compose)
 
-[Exercises](2-Docker-compose/1-compose)
+[Exercises for compose](2-Docker-compose/1-compose)
+
+[Exercises for automated builds](2-Docker-compose/2-automated-builds)
 
 ### Part 3
 
