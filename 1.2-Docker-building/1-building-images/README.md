@@ -81,7 +81,7 @@ docker run add-a-tron 321 123
 
 Cool! You have now build a container capable of taking commandline inputs, and returning a result based on the inputs.
 
-__Exercise__: Extend the application to take a random number of arguments. See for example https://stackoverflow.com/a/255913
+__Exercise__: Extend the application to take a arbitrary number of arguments. See for example https://stackoverflow.com/a/255913
 
 ### Create a web server that adds
 

@@ -32,7 +32,7 @@
 
 ### Part 4
 
-[Slides for Docker Swarm](https://gitpitch.com/mogensen/docker-handson-training/master?grs=github&t=moon&p=4-Microservice)
+[Slides for Microservices](https://gitpitch.com/mogensen/docker-handson-training/master?grs=github&t=moon&p=4-Microservice)
 
 
 ## I need more help - please
