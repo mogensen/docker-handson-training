@@ -196,7 +196,7 @@ Software Pilot at Trifork
   <div class="left-col">
 
   <ul>
-    <li>In a services we specify
+    <li>In a service we specify
     <ul>
       <li>Image</li>
       <li>Exposing external ports</li>

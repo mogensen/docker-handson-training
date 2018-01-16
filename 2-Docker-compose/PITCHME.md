@@ -68,7 +68,7 @@ version: '3'
 ## Docker Compose - YAML
 
 ```yaml
-version: '2'
+version: '3'
 services:
   db:
    image: mysql
