@@ -452,12 +452,12 @@ $ docker rm my-container   // Or container id from docker ps
 
 #### Creating images
 
-#### Exercises [here](https://github.com/mogensen/docker-handson-training/tree/master/1.2-Docker-building/2-building-images)
+#### Exercises [here](https://github.com/mogensen/docker-handson-training/tree/master/1.2-Docker-building/1-building-images)
 
 ---
 ## Docker Stop
 
-Did you notice that the `docker-compose stop` took a long time for the python app?
+Did you notice that the `docker stop` took a long time for the python app?
 
 ---
 ## `docker stop`
