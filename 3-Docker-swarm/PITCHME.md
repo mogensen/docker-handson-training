@@ -10,7 +10,7 @@ Software Pilot at Trifork
 <i>Focus on Docker, orchestration and ci/cd</i>
 </div>
 <div class="right-col-small">
-![image](assets/images/me.jpeg)
+![Image](assets/md/assets/me.jpeg)
 </div>
 
 ---
@@ -49,7 +49,7 @@ Software Pilot at Trifork
 
 
 
-![image](assets/images/cattle_no_text.png)
+![Image](assets/md/assets/cattle_no_text.png)
 
 
 |    |    |
@@ -60,7 +60,7 @@ Software Pilot at Trifork
 
 ---
 ## The Monolith Retirement
-![image](assets/images/monolithcomic.png)
+![Image](assets/md/assets/monolithcomic.png)
 
 <small>http://turnoff.us/geek/monolith-retirement/</small>
 
@@ -94,14 +94,14 @@ Software Pilot at Trifork
 ---
 ## What is Container Orchestration
 
-![image](assets/images/swarm.png)
-![image](assets/images/kubernetes.png)
-![image](assets/images/mesos.png)
+![Image](assets/md/assets/swarm.png)
+![Image](assets/md/assets/kubernetes.png)
+![Image](assets/md/assets/mesos.png)
 
 ---
 ## Desired state
 
-![image](assets/images/desired_state.png)
+![Image](assets/md/assets/desired_state.png)
 
 <small>https://www.slideshare.net/Docker/container-orchestration-from-theory-to-practice</small>
 
@@ -116,7 +116,7 @@ Software Pilot at Trifork
   </ul>
 </div>
 <div class="right-col">
-![image](assets/images/microservice_architecture.png)
+![Image](assets/md/assets/microservice_architecture.png)
 </div>
 </div>
 
@@ -143,7 +143,7 @@ Software Pilot at Trifork
   </ul>
 </div>
 <div class="right-col">
-![image](assets/images/microservice_architecture.png)
+![Image](assets/md/assets/microservice_architecture.png)
 </div>
 </div>
 
@@ -177,7 +177,7 @@ Software Pilot at Trifork
   </div>
   <div class="right-col">
 
-![image](assets/images/swarm.png)
+![Image](assets/md/assets/swarm.png)
 
   </div>
 </div>
@@ -185,7 +185,7 @@ Software Pilot at Trifork
 ---
 ## How nodes work
 
-![image](assets/images/swarm_architecture.png)
+![Image](assets/md/assets/swarm_architecture.png)
 
 <small>https://docs.docker.com/engine/swarm</small>
 
@@ -211,7 +211,7 @@ Software Pilot at Trifork
   </div>
   <div class="right-col">
 
-![image](assets/images/swarm_service.png)
+![Image](assets/md/assets/swarm_service.png)
 
   </div>
 </div>
@@ -239,7 +239,7 @@ Software Pilot at Trifork
   </div>
   <div class="right-col">
 
-![image](assets/images/swarm_service_mode.png)
+![Image](assets/md/assets/swarm_service_mode.png)
 
   </div>
 </div>
@@ -270,12 +270,12 @@ Software Pilot at Trifork
 <div class="left-col">
 Developer-edition
 
-![image](assets/images/swarm_network_simple.png)
+![Image](assets/md/assets/swarm_network_simple.png)
 </div>
 <div class="right-col">
 Network-guy-edition
 
-![image](assets/images/swarm_network_advanced.png)
+![Image](assets/md/assets/swarm_network_advanced.png)
 </div>
 
 <small>http://blog.nigelpoulton.com/demystifying-docker-overlay-networking/</small>
@@ -350,9 +350,253 @@ This is a secret
 ---
 ## Secrets
 
-![image](assets/images/swarm_secrets.png)
+![Image](assets/md/assets/swarm_secrets.png)
 
 <small>https://blog.docker.com/2017/02/docker-secrets-management/</small>
+
+
+---
+## The first Swarm
+
+- The cluster is initialized with `docker swarm init`
+- This should be executed on a first, seed node
+- _Warning:_ DO NOT execute `docker swarm init` on multiple nodes!
+  - You would have multiple disjoint clusters.
+
+> - Create our cluster from node1:
+>  ```bash
+>  docker swarm init
+>  ```
+
+---
+
+## IP address to advertise
+
+- Each node *advertises* its address
+  - *"you can contact me on 10.1.2.3:2377"*
+
+- If the node has only one IP address, it is used automatically
+- If the node has multiple IP addresses, you **must** specify which one to use
+- Specify an IP address or an interface name (`eth0`)
+- You can also specify a port number
+  - default port is 2377
+
+---
+## Using a non-default port number
+
+- Changing the *advertised* port does not change the *listening* port
+  - If you only pass `--advertise-addr eth0:7777`, Swarm will still listen on port 2377
+  - You will probably need to pass `--listen-addr eth0:7777` as well
+- This is to accommodate scenarios where these ports *must* be different
+  - port mapping, load balancers...
+
+Example to run Swarm on a different port:
+
+```bash
+docker swarm init --advertise-addr eth0:7777 --listen-addr eth0:7777
+```
+
+---
+## Which IP to use?
+
+- If your nodes have only one IP address, it's safe to let autodetection do the job
+  - <small>(Except if your instances have different private and public addresses, e.g.
+on EC2, and you are building a Swarm involving nodes inside and outside the
+private network: then you should advertise the public address.)</small>
+
+- If you have multiple IPs, pick one which is reachable *by every other node*
+
+- If you are using [play-with-docker](http://play-with-docker.com/), use the IP
+address shown next to the node name
+  - Or just `docker swarm init --advertise-addr eth0` 
+
+---
+## Separate interface for the data path
+
+- You can use different interfaces (or IP addresses) for control and data
+
+_control plane path_
+
+`--advertise-addr` and `--listen-addr`
+
+_data plane path_
+
+`--data-path-addr`
+
+Note:
+
+  This will be used for SwarmKit manager/worker communication, leader election, etc.
+  This will be used for traffic between containers
+
+- Both flags can accept either an IP address, or an interface name
+
+  When specifying an interface name, Docker will use its first IP address
+
+---
+
+## Token generation
+
+  ```
+  docker swarm init
+
+  Swarm initialized: current node (8jud...) is now a manager.
+  ```
+
+- Docker generated two security tokens for our cluster
+- Output shows the command to use on other nodes
+
+  ```
+    To add a worker to this swarm, run the following command:
+      docker swarm join \
+      --token SWMTKN-1-59fl4ak4nqjmao1ofttrc4eprhrola2l87... \
+      172.31.4.182:2377
+  ```
+
+---
+
+## Checking that Swarm mode is enabled
+
+> - Run the traditional `docker info` command:
+>  ```bash
+>  docker info
+>  ```
+
+The output should include:
+
+```
+Swarm: active
+ NodeID: 8jud7o8dax3zxbags3f8yox4b
+ Is Manager: true
+ ClusterID: 2vcw2oa9rjps3a24m91xhvv0c
+ ...
+```
+
+---
+## Running our first Swarm mode command
+
+> - List the nodes (well, the only node) of our cluster:
+>  ```bash
+>  docker node ls
+>  ```
+
+The output should look like the following:
+```
+ID             HOSTNAME  STATUS  AVAILABILITY  MANAGER STATUS
+8jud...ox4b *   node1     Ready   Active        Leader
+```
+
+---
+
+## Adding nodes to the Swarm
+
+- A cluster with one node is not a lot of fun
+- Let's add more!
+- We need the token that was shown earlier
+- You wrote it down, right?
+- Don't panic, we can easily see it again 😏|
+
+---
+## Adding nodes to the Swarm
+
+> - Show the token again
+
+```bash
+$ docker swarm join-token worker
+docker swarm join --token SWMTKN-1-56at..bz 192.168.0.17:2377
+```
+
+- Go to second machine
+
+- Copy-paste the `docker swarm join ...` command
+
+---
+## Is node in a swarm?
+
+- Stay on `node2` for now!
+
+- We can still use `docker info` to verify
+
+```bash
+$ docker info | grep ^Swarm
+```
+- However, Swarm commands will not work
+
+```bash
+$ docker node ls
+```
+
+- This is because the node that we added is currently a *worker*
+- Only *managers* can accept Swarm-specific commands
+
+---
+## View our two-node cluster
+
+- Let's go back to `node1` and see what our cluster looks like
+- View the cluster from `node1`, which is a manager:
+
+```bash
+docker node ls
+ID             HOSTNAME  STATUS  AVAILABILITY  MANAGER STATUS
+8jud...ox4b *  node1     Ready   Active        Leader
+ehb0...4fvx    node2     Ready   Active
+```
+
+---
+## Under the hood: docker swarm init
+
+When we do `docker swarm init`:
+
+- a keypair is created for the root CA of our Swarm
+- a keypair is created for the first node
+- a certificate is issued for this node
+- the join tokens are created
+
+---
+## Under the hood: join tokens
+
+- There is one token to *join as a worker*, and another to *join as a manager*.
+
+- The join tokens have two parts:
+  - a secret key (preventing unauthorized nodes from joining)
+  - a fingerprint of the root CA certificate (preventing MITM attacks)
+
+- If a token is compromised, it can be rotated instantly with
+
+```
+docker swarm join-token --rotate <worker|manager>
+```
+
+---
+## Under the hood: docker swarm join
+
+When a node joins the Swarm:
+
+- it is issued its own keypair, signed by the root CA
+
+- if the node is a manager:
+
+  - it joins the Raft consensus
+  - it connects to the current leader
+  - it accepts connections from worker nodes
+
+- if the node is a worker:
+
+  - it connects to one of the managers (leader or follower)
+
+---
+## Under the hood: cluster communication
+
+- *control plane* is encrypted with AES-GCM; keys are rotated every 12 hours
+- Authentication is done with mutual TLS; certificates are rotated every 90 days
+- The *data plane* (communication between containers) is not encrypted by default
+
+
+Note:
+
+- `docker swarm update` allows to change this delay or to use an external CA
+- but this can be activated on a by-network basis, using IPSEC,
+leveraging hardware crypto if available
+
 
 ---
 ## Docker Swarm Cheat Sheet
@@ -398,3 +642,55 @@ $ docker stack rm
 ## Hands On
 
 #### Exercises [here](https://github.com/mogensen/docker-handson-training/tree/master/3-Docker-swarm/Exercises.md)
+
+---
+## How many managers do we need?
+
+- 2N+1 nodes can (and will) tolerate N failures
+  - you can have an even number of managers, but there is no point
+
+- 1 manager = no failure
+
+- 3 managers = 1 failure
+
+- 5 managers = 2 failures (or 1 failure during 1 maintenance)
+
+- 7 managers and more = now you might be overdoing it a little bit
+
+---
+
+## Why not have *all* nodes be managers?
+
+- It's harder to reach consensus in larger groups
+- With Raft, writes have to go to (and be acknowledged by) all nodes
+- More nodes = more network traffic
+- Bigger network = more latency
+
+---
+
+## What would McGyver do?
+
+- If some of your machines are more than 10ms away from each other,
+  -  try to break them down in multiple clusters (keeping internal latency low)
+
+- < 9 nodes: all of them are managers
+- \> 10 nodes: pick 5 "stable" nodes to be managers
+- \> 100 nodes: watch your managers' CPU and RAM
+- \> 1000 nodes:
+
+  - if you can afford to have fast, stable managers, add more of them
+  - otherwise, break down your nodes in multiple clusters
+
+---
+
+## What's the upper limit?
+
+- We don't know!
+- Internal testing at Docker Inc.: 1000-10000 nodes is fine
+  - Deployed to a single cloud region
+  - One of the main take-aways was *"you're gonna need a bigger manager"*
+
+- Testing by the community: [4700 heterogenous nodes](https://sematext.com/blog/2016/11/14/docker-swarm-lessons-from-swarm3k/)
+  - It just works
+  - More nodes require more CPU; more containers require more RAM
+  - Scheduling of large jobs (70.000 containers) is slow, though (working on it!)
