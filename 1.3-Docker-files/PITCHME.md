@@ -74,6 +74,58 @@ CMD ["python", "app.py"]
 ```
 
 ---
+## Collapsing layers
+
+- It is possible to execute multiple commands in a single step:
+
+```dockerfile
+RUN apt-get update && apt-get install -y wget && apt-get clean
+```
+
+- It is possible to execute multiple commands in a single step:
+
+```dockerfile
+RUN apt-get update \
+ && apt-get install -y wget \
+ && apt-get clean
+```
+
+---
+
+## The `EXPOSE` instruction
+
+The `EXPOSE` instruction tells Docker what ports are to be published
+in this image.
+
+```dockerfile
+EXPOSE 8080
+EXPOSE 80 443
+EXPOSE 53/tcp 53/udp
+```
+
+* All ports are private by default.
+
+* Declaring a port with `EXPOSE` is not enough to make it public.
+
+* The `Dockerfile` doesn't control on which port a service gets exposed.
+
+---
+
+## Exposing ports
+
+* When you `docker run -p <port> ...`, that port becomes public.
+
+    (Even if it was not declared with `EXPOSE`.)
+
+* When you `docker run -P ...` (without port number), all ports
+  declared with `EXPOSE` become public.
+
+<small>A *public port* is reachable from other containers and from outside the host.
+
+A *private port* is not reachable from outside.
+</small>
+
+---
 ## Unit tests and build process
 
 ```dockerfile

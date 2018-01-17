@@ -27,6 +27,9 @@ Add two services in the `docker-compose.yml` file to run:
  - redis cache in version 3
  - the python addition server image.
 
+See https://docs.docker.com/compose/compose-file/ for help.
+Use version 3 or above.
+
 ### Build and start
 
 Standing in the directory where the `docker-compose.yml` file is, we can execute the following
