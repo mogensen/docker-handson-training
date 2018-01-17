@@ -94,9 +94,9 @@ Software Pilot at Trifork
 ---
 ## What is Container Orchestration
 
-![image](assets/images/swarm.jpg)
-![image](assets/images/kubernetes.jpg)
-![image](assets/images/mesos.jpg)
+![image](assets/images/swarm.png)
+![image](assets/images/kubernetes.png)
+![image](assets/images/mesos.png)
 
 ---
 ## Desired state

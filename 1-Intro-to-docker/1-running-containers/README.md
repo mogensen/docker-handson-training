@@ -71,6 +71,7 @@ This only shows pulled or build images. But an image usally consists of mulitple
 __Exercise__: Figure out how to make docker cli list all images including intermediate layers
 
 TODO: https://stackoverflow.com/questions/35310212/docker-missing-layer-ids-in-output
+http://blog.arungupta.me/show-layers-of-docker-image/
 
 
 ```shell

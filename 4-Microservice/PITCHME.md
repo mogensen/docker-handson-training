@@ -131,9 +131,9 @@ Distributed systems easily becomes very complex and following requests is no lon
 
 Deploying often and scaling the services when needed is a big benefit of using microservices.
 
-![image](assets/images/swarm.jpg)
-![image](assets/images/kubernetes.jpg)
-![image](assets/images/mesos.jpg)
+![image](assets/images/swarm.png)
+![image](assets/images/kubernetes.png)
+![image](assets/images/mesos.png)
 
 <small>https://blog.codeship.com/microservices-best-practices/</small>
 
