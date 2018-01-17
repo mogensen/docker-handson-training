@@ -288,11 +288,11 @@ RUN make hello
 CMD /hello
 ```
 
-@[3]On Debian and Ubuntu, the package `build-essential` will get us a compiler.
+@[3](On Debian and Ubuntu, the package `build-essential` will get us a compiler.)
 
-@[3]When installing it, don't forget to specify the `-y` flag, otherwise the build will fail (since the build cannot be interactive).
+@[3](When installing it, don't forget to specify the `-y` flag, otherwise the build will fail (since the build cannot be interactive).)
 
-@[4]Then we will use `COPY` to place the source file into the container.
+@[4](Then we will use `COPY` to place the source file into the container.)
 
 ---
 
