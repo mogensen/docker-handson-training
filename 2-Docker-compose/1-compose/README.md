@@ -53,10 +53,10 @@ Now you should be able to access the following:
 ### Cleanup
 
 ```shell
-## Build all services that use the `build` notation
+## Stop all services
 $ docker-compose stop
 
-# Start all services that are described in the `docker-compose.yml` file
+# Remove all services
 $ docker-compose rm
 ```
 
