@@ -169,7 +169,8 @@ We can deploy the stack with this description.
 
 Start by creating a yml file with the data above and deploy it to our cluster as in the last exercise.
 Check that you can see all five containers in the visualizer. You should also check that you can see the two frontends at port 5000 and 5001.
-Try voting.
+
+__Try voting.__
 
 ## Scaling the frontend service
 
@@ -195,7 +196,10 @@ Update the yml file with the new deployment info, stating that we want to have 5
 
 **[Consider!]** Take a moment to consider what will happen if you scale the redis cache instead of the vote application.
 
-**Hint:** The worker connects to the redis by using the redis service dns name. This results the worker only connection to a random instance of redis, and not to a redis cluster or to all redis instances. The same is the case for the PostgreSQL database. The votes may end in one database, but the result app could be looking in another instance.
+**Hint:** The worker connects to the redis by using the redis service dns name.
+This results in that the worker only connection to a random instance of redis, and not to a redis cluster or to all redis instances.
+The same is the case for the PostgreSQL database.
+The votes may end in one redis cache, but the result app could be looking in another instance.
 
 ## Network security
 
@@ -224,6 +228,8 @@ Create the following two networks in the yml file and specify the networks on th
 
 Note that this is something that docker has changed a lot over time.
 Newest documentation is here: [Docker compose endpoint mode](https://docs.docker.com/compose/compose-file/#endpoint_mode)
+
+_Note: When changing the network configuration in swarm, you may need to delete the entire stack and deploy it again!_
 
 ## Playing with node failure
 
