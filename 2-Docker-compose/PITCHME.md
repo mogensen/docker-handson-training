@@ -122,6 +122,8 @@ $ docker-compose stop
 ---
 ## Hands On
 
+#### Docker compose
+
 #### Exercises [here](https://github.com/mogensen/docker-handson-training/tree/master/2-Docker-compose/1-compose)
 
 ---

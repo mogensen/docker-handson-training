@@ -20,6 +20,8 @@ Python server that adds two numbers and uses redis as a centralized statistics c
 
 First create a dockerfile in the `addition-server` directory that describes how to build an image capable of running the python application.
 
+_Note:_ You should install both the `web.py` and `redis` python packages in the container.
+
 ### Create `docker-compose.yml`
 
 Add two services in the `docker-compose.yml` file to run:
