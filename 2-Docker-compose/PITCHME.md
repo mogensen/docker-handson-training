@@ -43,20 +43,20 @@ $ docker run --name=wp -p 8000:80 --link db:db \
 
 ```yaml
 version: '3'
-  services:
-    db:
-      image: mysql
-      environment:
-        MYSQL_ROOT_PASSWORD: root
-    wp:
-      depends_on:
-        - db
-      image: wordpress
-      ports:
-        - "8000:80"
-      environment:
-        WORDPRESS_DB_HOST: db
-        WORDPRESS_DB_PASSWORD: root
+services:
+  db:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+  wp:
+    depends_on:
+      - db
+    image: wordpress
+    ports:
+      - "8000:80"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_PASSWORD: root
 ```
 
 @[2](Define all services for application)
