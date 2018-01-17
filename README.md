@@ -43,6 +43,19 @@
 
 [Exercises](3-Docker-swarm/Exercises.md)
 
+
+### Part 3.1
+
+[Slides for Operating Swarm](https://gitpitch.com/mogensen/docker-handson-training/master?grs=github&t=moon&p=3.1-OperatingSwarm)
+
+[Exercises](3.1-OperatingSwarm/1-debugging)
+
+
+### Part 3.2
+
+[Slides for Swarm Secrets](https://gitpitch.com/mogensen/docker-handson-training/master?grs=github&t=moon&p=3.2-Secrets)
+
+
 ### Part 4
 
 [Slides for Microservices](https://gitpitch.com/mogensen/docker-handson-training/master?grs=github&t=moon&p=4-Microservice)
