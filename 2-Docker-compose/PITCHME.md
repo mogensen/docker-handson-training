@@ -92,6 +92,22 @@ $ docker-compose stop
 ```
 
 ---
+
+## Compose file versions
+
+- Version 1 directly has the various containers
+  - (`www`, `redis`...) at the top level of the  file.
+
+- Version 2 has multiple sections:
+  * `version` is mandatory and should be `"2"`.
+  * `services` is mandatory and corresponds to the content of the version 1 format.
+  * `networks` is optional and indicates to which networks   containers should be connected.
+  * `volumes` is optional and can define volumes to be used and/or shared by the containers.
+
+- Version 3
+  * adds support for deployment options (scaling, rolling updates, etc.)
+
+---
 # Usages of Compose
 
 ---
