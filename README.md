@@ -61,6 +61,11 @@
 [Slides for Microservices](https://gitpitch.com/mogensen/docker-handson-training/master?grs=github&t=moon&p=4-Microservice)
 
 
+### Part 4.1
+
+[Slides for Best Practices and Patterns](https://gitpitch.com/mogensen/docker-handson-training/master?grs=github&t=moon&p=4.1-MicroserviceBestPractices)
+
+
 ## I need more help - please
 
 If you are stuck in the exercises there is a branch called _"i\_need\_to\_cheat"_.
