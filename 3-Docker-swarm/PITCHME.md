@@ -10,7 +10,7 @@ Software Pilot at Trifork
 <i>Focus on Docker, orchestration and ci/cd</i>
 </div>
 <div class="right-col-small">
-![Image](assets/md/assets/me.jpeg)
+![Image](assets/images/me.jpeg)
 </div>
 
 ---
@@ -49,7 +49,7 @@ Software Pilot at Trifork
 
 
 
-![Image](assets/md/assets/cattle_no_text.png)
+![Image](assets/images/cattle_no_text.png)
 
 
 |    |    |
@@ -60,7 +60,7 @@ Software Pilot at Trifork
 
 ---
 ## The Monolith Retirement
-![Image](assets/md/assets/monolithcomic.png)
+![Image](assets/images/monolithcomic.png)
 
 <small>http://turnoff.us/geek/monolith-retirement/</small>
 
@@ -94,14 +94,14 @@ Software Pilot at Trifork
 ---
 ## What is Container Orchestration
 
-![Image](assets/md/assets/swarm.png)
-![Image](assets/md/assets/kubernetes.png)
-![Image](assets/md/assets/mesos.png)
+![Image](assets/images/swarm.png)
+![Image](assets/images/kubernetes.png)
+![Image](assets/images/mesos.png)
 
 ---
 ## Desired state
 
-![Image](assets/md/assets/desired_state.png)
+![Image](assets/images/desired_state.png)
 
 <small>https://www.slideshare.net/Docker/container-orchestration-from-theory-to-practice</small>
 
@@ -116,7 +116,7 @@ Software Pilot at Trifork
   </ul>
 </div>
 <div class="right-col">
-![Image](assets/md/assets/microservice_architecture.png)
+![Image](assets/images/microservice_architecture.png)
 </div>
 </div>
 
@@ -143,7 +143,7 @@ Software Pilot at Trifork
   </ul>
 </div>
 <div class="right-col">
-![Image](assets/md/assets/microservice_architecture.png)
+![Image](assets/images/microservice_architecture.png)
 </div>
 </div>
 
@@ -177,7 +177,7 @@ Software Pilot at Trifork
   </div>
   <div class="right-col">
 
-![Image](assets/md/assets/swarm.png)
+![Image](assets/images/swarm.png)
 
   </div>
 </div>
@@ -185,7 +185,7 @@ Software Pilot at Trifork
 ---
 ## How nodes work
 
-![Image](assets/md/assets/swarm_architecture.png)
+![Image](assets/images/swarm_architecture.png)
 
 <small>https://docs.docker.com/engine/swarm</small>
 
@@ -211,7 +211,7 @@ Software Pilot at Trifork
   </div>
   <div class="right-col">
 
-![Image](assets/md/assets/swarm_service.png)
+![Image](assets/images/swarm_service.png)
 
   </div>
 </div>
@@ -239,7 +239,7 @@ Software Pilot at Trifork
   </div>
   <div class="right-col">
 
-![Image](assets/md/assets/swarm_service_mode.png)
+![Image](assets/images/swarm_service_mode.png)
 
   </div>
 </div>
@@ -270,12 +270,12 @@ Software Pilot at Trifork
 <div class="left-col">
 Developer-edition
 
-![Image](assets/md/assets/swarm_network_simple.png)
+![Image](assets/images/swarm_network_simple.png)
 </div>
 <div class="right-col">
 Network-guy-edition
 
-![Image](assets/md/assets/swarm_network_advanced.png)
+![Image](assets/images/swarm_network_advanced.png)
 </div>
 
 <small>http://blog.nigelpoulton.com/demystifying-docker-overlay-networking/</small>
@@ -350,7 +350,7 @@ This is a secret
 ---
 ## Secrets
 
-![Image](assets/md/assets/swarm_secrets.png)
+![Image](assets/images/swarm_secrets.png)
 
 <small>https://blog.docker.com/2017/02/docker-secrets-management/</small>
 

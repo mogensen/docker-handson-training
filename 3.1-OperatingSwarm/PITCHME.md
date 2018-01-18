@@ -10,7 +10,7 @@ Software Pilot at Trifork
 <i>Focus on Docker, orchestration and ci/cd</i>
 </div>
 <div class="right-col-small">
-![Image](assets/md/assets/me.jpeg)
+![Image](assets/images/me.jpeg)
 </div>
 
 ---
