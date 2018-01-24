@@ -185,7 +185,6 @@ This interferes with product team’s responsibility which is one of the more im
 ---
 ## A shared code base that is not owned by the teams
 
-
 - The code must be shared by all teams with each developer able to send a pull request.
 - Only utility logic should be shared
   - Sharing domain logic breaks the boundaries between contexts

@@ -37,6 +37,11 @@
 
 [Exercises for Volumes](2.1-Docker-local-development/1-volume)
 
+### Part 2.2
+
+[Slides for Volumes](https://gitpitch.com/mogensen/docker-handson-training/master?grs=github&t=moon&p=2.2-Volumes)
+
+
 ### Part 3
 
 [Slides for Docker Swarm](https://gitpitch.com/mogensen/docker-handson-training/master?grs=github&t=moon&p=3-Docker-swarm)
@@ -54,7 +59,6 @@
 ### Part 3.2
 
 [Slides for Swarm Secrets](https://gitpitch.com/mogensen/docker-handson-training/master?grs=github&t=moon&p=3.2-Secrets)
-
 
 ### Part 4
 
