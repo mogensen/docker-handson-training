@@ -37,10 +37,28 @@ In this part we use Play With Docker as a free provider of Alpine Linux Virtual 
 
 This can be found at: [http://play-with-docker.com/](http://play-with-docker.com/)
 
-If you are not at at all able to use vim, which is the only editor available on play with docker, you can install another.
+### Alternative text editor
+
+The only editor available on play with docker is vim.
+If you do not feel at home in vim, you have some other options.
+
+#### 1. You can install another.
+
+Such as nano:
 
     $ apk update
     $ apk add nano
+
+#### 2. Use the browser editor
+
+In the top of the window on Play With Docker there is a button labled "Editor".
+This allows you to edit filed that are on the different machine instances.
+
+To use the editor you need to create a file in the terminal in order to see it there.
+First you do a `touch docker-compose.yaml` and then open the editor (or use the refresh button in the editor window) you'll see the file
+there.
+
+#### 3. Install the docker-machine driver for Play With Docker
 
 Or install the [docker-machine driver for Play With Docker](https://github.com/play-with-docker/docker-machine-driver-pwd), to be able to edit files locally on your own machine.
 
@@ -94,7 +112,9 @@ Delete the service we created above.
     $ docker service rm viz
 
 Change the command we just ran to a docker-compose file with the name _docker-visualize.yml_. Looking something like this:
-(Note that the volume mapping does not have quite the same format in the command line as it does in the docker-compose file)
+
+**[Note]** The volume mapping does not have quite the same format in the command line as it does in the docker-compose file.
+And make sure to choose a docker-compose version that are supported by your docker version.
 
     version: "3"
     services:
@@ -168,7 +188,7 @@ We can deploy the stack with this description.
       db-data:
 
 Start by creating a yml file with the data above and deploy it to our cluster as in the last exercise.
-Check that you can see all five containers in the visualizer. You should also check that you can see the two frontends at port 5000 and 5001.
+Check that you can see all five containers in the visualizer and that they turn green. You should also check that you can see the two frontends at port 5000 and 5001.
 
 __Try voting.__
 
@@ -231,12 +251,17 @@ Newest documentation is here: [Docker compose endpoint mode](https://docs.docker
 
 _Note: When changing the network configuration in swarm, you may need to delete the entire stack and deploy it again!_
 
+### Exercise - Inspect the network separation
+
+Try to verify that the two new networks contain exactly the expected containers, using the docker cli.
+
 ## Playing with node failure
 
-To simulate a failing node (bloody hardware failing all the time) try deleting one of the worker nodes in the Play With Docker interface.
+To simulate a failing node (bloody hardware failing all the time) try deleting one of the worker nodes (*not the only master you have!*) in the Play With Docker interface.
 When doing this keep an eye on the visualizer and see how all the containers are redeployed on the remaining node.
 
 Try creating two new nodes and joining them to the cluster. By default docker swarm will not move running containers to the new nodes.
+No need to kill and move containers that are already working as expected.
 Try scaling up the _vote_ or _worker_ services and see how the containers are placed.
 
 ## Specify placement for the services
@@ -249,7 +274,7 @@ See [documentation](https://docs.docker.com/engine/swarm/manage-nodes/#add-or-re
 
 Update the yml file with conditions on the _db_ service that specify that it can only be deployed on _disk=ssd_. Validate by looking in the visualizer.
 
-You can also change the other services to make sure that only the database runs on machines with ssd.
+You can also change the other services to make sure that only the database is the only sevice running on machines with ssd.
 
 Try setting the manager as _drained_ so no containers are scheduled on the manager.
 
@@ -264,7 +289,7 @@ An example of setting the limits from command line could look like this:
       --reserve-cpu 0.1 \
       webapp
 
-The _reserve-cpu_ parameter tells docker how much it can pack the container on a host, so that each container will always have at least the reserved cpu amount available.
+The _reserve-cpu_ parameter tells docker how much it can pack the container on a host, so that each container will always have at least the reserved cpu amount available. _limit-cpu_ tells docker when the container is no longer behaving as expected, and should be killed.
 
 ### Exercise - Limiting CPU and memory
 

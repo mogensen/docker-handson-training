@@ -314,19 +314,19 @@ eb0eeab782f4        host                host
 ---
 ## What's in a network?
 
-* Conceptually, a network is a virtual switch.
-* It can be local (to a single Engine) or global (spanning multiple hosts).
+* A network is a virtual switch.
+  - Local, to a single Engine, or global, spanning multiple hosts.
 * A network has an IP subnet associated to it.
-* Docker will allocate IP addresses to the containers connected to a network.
-* Containers can be connected to multiple networks.
-* Containers can be given per-network names and aliases.
-* The names and aliases can be resolved via an embedded DNS server.
+* Containers connected to a network gets an IP address.
+* Containers can be 
+ - connected to multiple networks.
+ - given per-network names and aliases.
 
 ---
 ## Network implementation details
 
 * A network is managed by a *driver*.
-* All the drivers that we have seen before are available.
+* All normal docker drivers are available.
 * A new multi-host driver, *overlay*, is available out of the box.
 * More drivers can be provided by plugins (OVS, VLAN...)
 * A network can have a custom IPAM (IP allocator).
@@ -338,19 +338,20 @@ eb0eeab782f4        host                host
 $ echo "This is a secret" \
   | docker secret create my_secret –
 
+
 $ docker service create --name redis \
   --secret my_secret redis:alpine
 
+
 $ docker exec redis \
   cat /run/secrets/my_secret
-
 This is a secret
 ```
 
 ---
 ## Secrets
 
-![Image](assets/images/swarm_secrets.png)
+![Image](./assets/md/assets/swarm_secrets.png)
 
 <small>https://blog.docker.com/2017/02/docker-secrets-management/</small>
 
@@ -358,18 +359,15 @@ This is a secret
 ---
 ## The first Swarm
 
-- The cluster is initialized with `docker swarm init`
-- This should be executed on a first, seed node
-- _Warning:_ DO NOT execute `docker swarm init` on multiple nodes!
-  - You would have multiple disjoint clusters.
-
-> - Create our cluster from node1:
 >  ```bash
 >  docker swarm init
 >  ```
 
----
+- This should be executed on a first, seed node
+- _Warning:_ DO NOT execute `docker swarm init` on multiple nodes!
+  - You would have multiple disjoint clusters.
 
+---
 ## IP address to advertise
 
 - Each node *advertises* its address
@@ -499,11 +497,11 @@ ID             HOSTNAME  STATUS  AVAILABILITY  MANAGER STATUS
 ## Adding nodes to the Swarm
 
 > - Show the token again
-
-```bash
-$ docker swarm join-token worker
-docker swarm join --token SWMTKN-1-56at..bz 192.168.0.17:2377
-```
+>
+> ```bash
+> $ docker swarm join-token worker
+> docker swarm join --token SWMTKN-1-56at..bz 192.168.0.17:2377
+> ```
 
 - Go to second machine
 
@@ -662,7 +660,7 @@ $ docker stack rm
 ## Why not have *all* nodes be managers?
 
 - It's harder to reach consensus in larger groups
-- With Raft, writes have to go to (and be acknowledged by) all nodes
+- With Raft, writes have to be send to (and be acknowledged by) all nodes
 - More nodes = more network traffic
 - Bigger network = more latency
 
