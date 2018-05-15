@@ -65,11 +65,11 @@ Software Pilot at Trifork
 ```bash
 docker pull mikegcoleman/catweb:latest
 docker images
-docker run -d -p 5000:5000 --name catweb mikegcoleman/catweb:latest
+docker run -d -p 5000:5000 --name catweb mikegcoleman/catweb:1.0
 docker ps
 docker stop catweb // or <container id>
 docker rm catweb // or <container id>
-docker rmi mikegcoleman/catweb:latest // or <image id>
+docker rmi mikegcoleman/catweb:1.0 // or <image id>
 ```
 
 ---
@@ -144,7 +144,7 @@ Build, Ship, and Run
 - After Docker is installed, run Catweb
 
 ```shell
-$ docker run –p 5000:5000 --name catweb mikegcoleman/catweb
+$ docker run -p 5000:5000 --name catweb mikegcoleman/catweb:1.0
 ```
 
 Browse to port 5000 on your machine: http://localhost:5000

@@ -351,7 +351,7 @@ This is a secret
 ---
 ## Secrets
 
-![Image](./assets/md/assets/swarm_secrets.png)
+![Image](assets/images/swarm_secrets.png)
 
 <small>https://blog.docker.com/2017/02/docker-secrets-management/</small>
 
@@ -668,6 +668,32 @@ $ docker stack rm
 
 ## What would McGyver do?
 
+---
+## How many managers do we need?
+
+- 2N+1 nodes can (and will) tolerate N failures
+  - you can have an even number of managers, but there is no point
+
+- 1 manager = no failure
+
+- 3 managers = 1 failure
+
+- 5 managers = 2 failures (or 1 failure during 1 maintenance)
+
+- 7 managers and more = now you might be overdoing it a little bit
+
+---
+
+## Why not have *all* nodes be managers?
+
+- It's harder to reach consensus in larger groups
+- With Raft, writes have to be send to (and be acknowledged by) all nodes
+- More nodes = more network traffic
+- Bigger network = more latency
+
+---
+
+## What would McGyver do?
 - If some of your machines are more than 10ms away from each other,
   -  try to break them down in multiple clusters (keeping internal latency low)
 

@@ -89,7 +89,7 @@ by Chad Fowler, where he explains the concept of immutable infrastructure.)*
 
 Let's mess up majorly with our container.
 
-Delete the `company_name_generator.rb` file. Does it still work in the browser? No?
+Try breaking the ruby syntax in the `company_name_generator.rb` file. Does it still work in the browser? No?
 Now, how can we fix this?
 
 Our old container (with the blue version of the code) is still running.
@@ -118,11 +118,11 @@ There has to be a better way!
 
 ## Exercise: Docker Compose to the rescue
 
-Instead of looking at the `docker-compose.ym` in the example, try to make your own.
+Instead of looking at the `docker-compose.yml` in the repository, try to make your own.
 
 Take the docker commands that we have used so fare, and write a new `my-docker-compose.yml` file that we can use for our "namer" app.
 
-_Hint:_ It should contain a build element that defines how to build the container, a volumes element that defines that to map where, and a ports element that allows us to access the container
+_Hint:_ It should contain a __build__ element that defines how to build the container, a __volumes__ element that defines that to map where, and a __ports__ element that allows us to access the container.
 
 Now try it:
 
@@ -147,7 +147,8 @@ $ docker-compose up -d -f my-docker-compose.yml
 4. Test the application.
    <br/>
    (Some frameworks pick up changes automatically.
-   <br/>Others require you to Ctrl-C + restart after each modification.)
+   <br/>Others require you to Ctrl-C + restart after each modification.
+   <br/>Some, like NodeJs, has framworks specifically for development that will watch the files on disk to always run the latest version.)
 
 5. Iterate and repeat steps 3 and 4 until satisfied.
 
@@ -182,6 +183,9 @@ root@5ca27cf74c2e:/opt/namer# irb
 irb(main):001:0> [0, 1, 2, 3, 4].map {|x| x ** 2}.compact
 => [0, 1, 4, 9, 16]
 irb(main):002:0> exit
+
+$ # To exit the container and go back to your own machine type exit
+$ exit
 ```
 
 ## Stopping the container

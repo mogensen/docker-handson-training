@@ -33,7 +33,7 @@
 
 ### Part 2.1
 
-[Slides for Volumes](https://gitpitch.com/mogensen/docker-handson-training/master?grs=github&t=moon&p=2.1-Docker-local-development)
+[Slides for Local development with Volumes](https://gitpitch.com/mogensen/docker-handson-training/master?grs=github&t=moon&p=2.1-Docker-local-development)
 
 [Exercises for Volumes](2.1-Docker-local-development/1-volume)
 
