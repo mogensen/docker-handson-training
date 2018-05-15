@@ -30,7 +30,7 @@ Check on which port the container is listening. And access it in your browser.
 
 ## Local development - fast
 
-Now. We need to update the code, and to fo this we will:
+Now. We need to update the code, and for this we will:
 
   * Use a *volume* to mount local files into the container
   * Make changes locally
