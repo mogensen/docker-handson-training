@@ -65,11 +65,11 @@ Software Pilot at Trifork
 ```bash
 docker pull mikegcoleman/catweb:latest
 docker images
-docker run -d -p 5000:5000 --name catweb mikegcoleman/catweb:latest
+docker run -d -p 5000:5000 --name catweb mikegcoleman/catweb:1.0
 docker ps
 docker stop catweb // or <container id>
 docker rm catweb // or <container id>
-docker rmi mikegcoleman/catweb:latest // or <image id>
+docker rmi mikegcoleman/catweb:1.0 // or <image id>
 ```
 
 ---
@@ -144,29 +144,207 @@ Build, Ship, and Run
 - After Docker is installed, run Catweb
 
 ```shell
-$ docker run –d –p 5000:5000 --name catweb mikegcoleman/catweb
+$ docker run -p 5000:5000 --name catweb mikegcoleman/catweb:1.0
 ```
 
 Browse to port 5000 on your machine: http://localhost:5000
 
 ---
+# Background containers
+
+---
+
+## Objectives
+
+Our first containers were *interactive*.
+
+We will now see how to:
+
+* Run a non-interactive container.
+* Run a container in the background.
+* List running containers.
+* Check the logs of a container.
+* Stop a container.
+* List stopped containers.
+
+---
+
+## A non-interactive container
+
+We will run a small custom container.
+
+This container just displays the time every second.
+
+```bash
+$ docker run jpetazzo/clock
+Fri Feb 20 00:28:53 UTC 2015
+Fri Feb 20 00:28:54 UTC 2015
+Fri Feb 20 00:28:55 UTC 2015
+...
+```
+
+* This container will run forever.
+* To stop it, press `^C`.
+
+Note:
+
+* Docker has automatically downloaded the image `jpetazzo/clock`.
+* This image is a user image, created by `jpetazzo`.
+* We will hear more about user images (and other types of images) later.
+
+---
+
+## Run a container in the background
+
+Containers can be started in the background, with the `-d` flag (daemon mode):
+
+```bash
+$ docker run -d jpetazzo/clock
+47d677dcfba4277c6cc68fcaa51f932b544cab1a187c853b7d0caf4e8debe5ad
+```
+
+* We don't see the output of the container.
+* But don't worry: Docker collects that output and logs it!
+* Docker gives us the ID of the container.
+
+---
+
+## List running containers
+
+How can we check that our container is still running?
+
+With `docker ps`, just like the UNIX `ps` command, lists running processes.
+
+```bash
+$ docker ps
+CONTAINER ID  IMAGE           ...  CREATED        STATUS        ...
+47d677dcfba4  jpetazzo/clock  ...  2 minutes ago  Up 2 minutes  ...
+```
+
+Note:
+
+Docker tells us:
+
+* The (truncated) ID of our container.
+* The image used to start the container.
+* That our container has been running (`Up`) for a couple of minutes.
+* Other information (COMMAND, PORTS, NAMES) that we will explain later.
+
+---
+
+## Starting more containers
+
+Let's start two more containers.
+
+```bash
+$ docker run -d jpetazzo/clock
+57ad9bdfc06bb4407c47220cf59ce21585dce9a1298d7a67488359aeaea8ae2a
+```
+
+```bash
+$ docker run -d jpetazzo/clock
+068cc994ffd0190bbe025ba74e4c0771a5d8f14734af772ddee8dc1aaf20567d
+```
+
+Check that `docker ps` correctly reports all 3 containers.
+
+---
+## View the logs of a container
+
+Docker collects all logs from the containers output.
+
+Let's see that now.
+
+```bash
+$ docker logs 068
+Fri Feb 20 00:39:52 UTC 2015
+Fri Feb 20 00:39:53 UTC 2015
+...
+```
+
+Note:
+* We specified a *prefix* of the full container ID.
+* You can, of course, specify the full ID.
+* The `logs` command will output the *entire* logs of the container.
+
+---
+## View only the tail of the logs
+
+To avoid being spammed with eleventy pages of output,
+we can use the `--tail` option:
+
+```bash
+$ docker logs --tail 3 068
+Fri Feb 20 00:55:35 UTC 2015
+Fri Feb 20 00:55:36 UTC 2015
+Fri Feb 20 00:55:37 UTC 2015
+```
+
+Note:
+
+* The parameter is the number of lines that we want to see.
+
+---
+
+## Follow the logs in real time
+
+Just like with the standard UNIX command `tail -f`, we can
+follow the logs of our container:
+
+```bash
+$ docker logs --tail 1 --follow 068
+Fri Feb 20 00:57:12 UTC 2015
+Fri Feb 20 00:57:13 UTC 2015
+^C
+```
+
+* This will display the last line in the log file.
+* Then, it will continue to display the logs in real time.
+* Use `^C` to exit.
+
+---
 ## Docker Container Architecture
 
 ---
-## Image Layers
+
+## What is an image?
+
+- Image = files + metadata
+- These files form the root filesystem of our container.
+- The metadata can indicate a number of things, e.g.:
+  - the author of the image
+  - the command to execute in the container when starting it
+  - environment variables to be set
+  - etc.
+* Images are made of *layers*, conceptually stacked on top of each other.
+* Each layer can add, change, and remove files and/or metadata.
+* Images can share layers to optimize disk usage, transfer times, and memory use.
+
+---
+## Differences between containers and images
+
+* An image is a read-only filesystem.
+* A container is an encapsulated set of processes running in a
+  read-write copy of that filesystem.
+* To optimize container boot time, *copy-on-write* is used 
+  instead of regular copy.
+* `docker run` starts a container from a given image.
+
+---
+## Example of Catweb Image Layers
 
 ![image](assets/images/catweb-layers.png)
 
 ---
 ## Docker File System
 
-- Logical file system by grouping different file system primitives into branches (directories, file systems, subvolumes, snapshots)
+If an image is read-only, how do we change it?
 
-- Each branch represents a layer in a Docker image
-
-- Allows images to be constructed / deconstructed as needed vs. a huge monolithic image (ala traditional virtual machines)
-
-- When a container is started a writeable layer is added to the “top” of the file system
+- We don't.
+- We create a new container from that image.
+- Then we make changes to that container.
+- When we are satisfied with those changes, we transform them into a new layer.
+- A new image is created by stacking the new layer on top of the old image.
 
 ---
 ## Copy on Write
@@ -186,11 +364,96 @@ Browse to port 5000 on your machine: http://localhost:5000
 - Volumes allow you to specify a directory in the container that exists outside of the
 docker file system structure
 - Can be used to share (and persist) data between containers
-
 - Directory persists after the container is deleted
   - Unless you explicitly delete it
-
 - Can be created in a Dockerfile or via CLI
+
+---
+## Images namespaces
+
+There are three namespaces:
+
+* Official images
+
+    e.g. `ubuntu`, `busybox` ...
+
+* User (and organizations) images
+
+    e.g. `jpetazzo/clock`
+
+* Self-hosted images
+
+    e.g. `registry.example.com:5000/my-private/image`
+
+Let's explain each of them.
+
+---
+## Root namespace
+
+The root namespace is for official images. They are put there by Docker Inc.,
+but they are generally authored and maintained by third parties.
+
+Those images include:
+
+* Small, "swiss-army-knife" images like busybox.
+* Distro images to be used as bases for your builds, like ubuntu, fedora...
+* Ready-to-use components and services, like redis, postgresql...
+
+---
+## User namespace
+
+The user namespace holds images for Docker Hub users and organizations.
+
+For example:
+
+```bash
+jpetazzo/clock
+```
+
+The Docker Hub user is:
+
+```bash
+jpetazzo
+```
+
+The image name is:
+
+```bash
+clock
+```
+
+---
+## Self-Hosted namespace
+
+This namespace holds images which are not hosted on Docker Hub, but on third
+party registries.
+
+They contain the hostname (or IP address), and optionally the port, of the
+registry server.
+
+For example:
+
+```bash
+localhost:5000/wordpress
+```
+
+* `localhost:5000` is the host and port of the registry
+* `wordpress` is the name of the image
+
+---
+## How do you store and manage images?
+
+Images can be stored:
+
+* On your Docker host.
+* In a Docker registry.
+
+You can use the Docker client to download (pull) or upload (push) images.
+
+Note:
+
+To be more accurate: you can use the Docker client to tell a Docker Engine
+to push and pull images to and from a registry.
 
 ---
 ## One platform - one journey
@@ -220,38 +483,4 @@ Note:
 
 #### Playing with docker containers
 
-#### Exercises [here](https://github.com/mogensen/docker-handson-training/tree/master/1-Intro-to-docker/Exercises.md)
-
----
-## Building images
-
----
-## Docker Cheat Sheet
-
-Building
-
-```shell
-$ docker build -t my-image .
-$ docker build -t my-image -f my.dockerfile .
-```
-
-Running
-
-```shell
-$ docker run my-image
-$ docker run -p 9000:8080 --name my-container my-image
-```
-
-Cleanup
-
-```shell
-$ docker stop my-container // Or container id from docker ps
-$ docker rm my-container   // Or container id from docker ps
-```
-
----
-## Hands On
-
-#### Creating images
-
-#### Exercises [here](https://github.com/mogensen/docker-handson-training/tree/master/1-Intro-to-docker/1-building-images)
+#### Exercises [here](https://github.com/mogensen/docker-handson-training/tree/master/1-Intro-to-docker/1-running-containers)

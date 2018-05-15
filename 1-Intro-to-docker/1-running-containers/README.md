@@ -6,8 +6,6 @@
 >
 > **This means, that the exercise set is not a simple copy & paste exercise**
 
-
-
 ### Credits
 The exercises are build on exercises from the following workshop:
 https://github.com/christian-posta/docker-kubernetes-workshop
@@ -70,7 +68,11 @@ centos              x                   e9fa5d3a0d0e        2 days ago          
 
 This only shows pulled or build images. But an image usally consists of mulitple layers of images.
 
-__Exercise__: Figure out how to make docker cli list all images including itermmediate layers
+__Exercise__: Figure out how to make docker cli list all images including intermediate layers
+
+TODO: https://stackoverflow.com/questions/35310212/docker-missing-layer-ids-in-output
+http://blog.arungupta.me/show-layers-of-docker-image/
+
 
 ```shell
 REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE

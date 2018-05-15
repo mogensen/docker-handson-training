@@ -13,9 +13,11 @@ ol li ol li {
   font-size: 60% !important;
 }
 
-.reveal img, .reveal video, .reveal iframe {
-    max-width: 75%;
-    max-height: 75%;
+.reveal img,
+.reveal video,
+.reveal iframe {
+  max-width: 40vw;
+  max-height: 35vh;
 }
 
 .reveal .left-col img,
