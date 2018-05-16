@@ -6,7 +6,7 @@ import web
 from redis import Redis
 
 urls = (
-    '/add', 'add',
+    '/add/(.*?)/(.*?)', 'add',
     '/stats', 'stats'
 )
 
@@ -14,11 +14,10 @@ app = web.application(urls, globals())
 redis = Redis(host= "redis", port=6379)
 
 class add:
-    def GET(self):
+    def GET(self, a, b):
         redis.incr('additions')
-        a = int(web.input()['A'])
-        b = int(web.input()['B'])
-        return "{0} + {1} = {2}".format(a, b, (a+b))
+        return "{0} + {1} = {2}".format(a, b, (int(a) + int(b)))
+
 
 
 class stats:

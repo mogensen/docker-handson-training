@@ -1,15 +1,15 @@
 import web
 
 urls = (
-    '/add', 'add'
+    '/add/(.*?)/(.*?)', 'add'
 )
 app = web.application(urls, globals())
 
+
+
 class add:        
-    def GET(self):
-        a = int(web.input()['A'])
-        b = int(web.input()['B'])
-        return "{0} + {1} = {2}".format(a, b, (a+b))
+    def GET(self, a, b):
+        return "{0} + {1} = {2}".format(a, b, (int(a) + int(b)))
 
 if __name__ == "__main__":
     app.run()

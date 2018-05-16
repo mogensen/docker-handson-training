@@ -146,5 +146,10 @@ CMD, EXPOSE ...
 @[1-7] (If `RUN <unit tests>` fails, the build doesn't produce an image)
 @[8-11] (If it succeeds, it produces a clean image (without test libraries and data))
 
+
 ---
-## Questions
+## Questions and Hands On
+
+#### Efficient images
+
+#### Exercises [here](https://github.com/mogensen/docker-handson-training/tree/master/1.3-Docker-files/1-efficient-docker-files)

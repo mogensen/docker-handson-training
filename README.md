@@ -22,6 +22,8 @@
 
 [Slides for Efficient Dockerfiles](https://gitpitch.com/mogensen/docker-handson-training/master?grs=github&t=moon&p=1.3-Docker-files)
 
+[Exercises](1.3-Docker-files/1-efficient-docker-files)
+
 ### Part 2
 
 [Slides for Docker Compose](https://gitpitch.com/mogensen/docker-handson-training/master?grs=github&t=moon&p=2-Docker-compose)
