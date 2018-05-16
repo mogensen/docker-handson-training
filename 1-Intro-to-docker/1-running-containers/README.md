@@ -127,7 +127,7 @@ A real linux distro right? Did you notice that *`ps aux`* didn't show too many p
 
 ### Destroy all the stuff
 
-> **_WARNING:_ Make sure that you are IN the docker container and NOT in your local machines terminal !**
+> :warning: **_ WARNING:_ Make sure that you are IN the docker container and NOT in your local machines terminal !**
 
 Let's do some destructive stuff:
 
