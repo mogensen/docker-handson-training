@@ -66,22 +66,7 @@ REPOSITORY          TAG                 IMAGE ID            CREATED             
 centos              x                   e9fa5d3a0d0e        2 days ago          172.3 MB
 ```
 
-This only shows pulled or build images. But an image usally consists of mulitple layers of images.
-
-__Exercise__: Figure out how to make docker cli list all images including intermediate layers
-
-TODO: https://stackoverflow.com/questions/35310212/docker-missing-layer-ids-in-output
-http://blog.arungupta.me/show-layers-of-docker-image/
-
-
-```shell
-REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
-centos              x                   e9fa5d3a0d0e        2 days ago          172.3 MB
-<none>              <none>              c9853740aa05        2 days ago          172.3 MB
-<none>              <none>              e9407f1d4b65        2 days ago          172.3 MB
-<none>              <none>              0cd86ce0a197        2 days ago          172.3 MB
-<none>              <none>              fa5be2806d4c        5 weeks ago         0 B
-```
+This only shows pulled or build image.
 
 ### Running the Docker container
 
@@ -201,7 +186,7 @@ __Exercise__: Use `docker run --help` to figure out what `-p` does.
 
 Now we should be able to connect to *`http://localhost:{some port}`* and see that tomcat is running.
 
-__Exercise__: Figure out port and access the url in a browser.
+__Exercise__: Figure out the port and access the url in a browser.
 
 _If this did not work, you may be running docker in a virtual machine on your mac or windows machine. Then we need to mapped the Docker Host ports properly._
 
@@ -304,6 +289,25 @@ docker inspect --format='{{.Config.Env}}' tomcat8
 ```
 
 __Exercise__: Write a command that uses `docker inspect` and `--format` to figure out when the tomcat container was "StartedAt". 
+
+
+### Looking at the tomcat image
+
+An image usally consists of mulitple layers of images. Lets try to find out that layers the tomcat:8.0 image consists of.
+
+__Exercise__: Figure out how to make docker cli to display the history of an image, and there by listing all layers of a specific image
+
+```shell
+$ docker ?? tomcat:8.0
+IMAGE               CREATED             CREATED BY                                      SIZE                COMMENT
+8bfd42907609        31 hours ago        /bin/sh -c #(nop)  CMD ["catalina.sh" "run"]    0B
+<missing>           31 hours ago        /bin/sh -c #(nop)  EXPOSE 8080/tcp              0B
+<missing>           31 hours ago        /bin/sh -c set -e  && nativeLines="$(catalin…   0B
+...
+<missing>           11 days ago         /bin/sh -c apt-get update && apt-get install…   41.2MB
+<missing>           2 weeks ago         /bin/sh -c #(nop)  CMD ["bash"]                 0B
+<missing>           2 weeks ago         /bin/sh -c #(nop) ADD file:3e6141c0c9cb74b14…   127MB
+```
 
 ### Stop and Remove container
 
